@@ -9,10 +9,7 @@
 
 </head>
 <body>
-<img src="pictures/search_logo.jpg" class="search_logo">
-<form class="form-wrapper" action="results.jsp" method="post">
-    <input type="text" name="search" id="search" placeholder="Search for..." required>
-    <input type="submit" value="go" id="submit">
-</form>
+<%!String searchString; %>
+<p>your search string is: <%=request.getParameter("search")%>
 </body>
 </html>
