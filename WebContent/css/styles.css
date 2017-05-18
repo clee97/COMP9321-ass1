@@ -12,9 +12,8 @@ a.shopping_cart {
 
 table {
     border-collapse: collapse;
-    width: 100%;
     table-layout: fixed;
-    width: 50%;
+    width: 60%;
 }
 
 th, td {

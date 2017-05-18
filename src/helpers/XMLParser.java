@@ -17,7 +17,9 @@ public class XMLParser {
 			DOMParser domp = new DOMParser();
 			ArrayList<Element> bookList = new ArrayList<Element>();
 //			domp.parse("WebContent/dblp.xml");
-			domp.parse("../../../git/COMP9321-ass1/WebContent/dblp.xml");
+//			domp.parse("../../../git/COMP9321-ass1/WebContent/dblp.xml");
+			domp.parse("../git/COMP9321-ass1/WebContent/dblp.xml");
+			
 			NodeList nl = domp.getDocument().getElementsByTagName("book");
 			
 			for (int i = 0; i < nl.getLength(); i++){
