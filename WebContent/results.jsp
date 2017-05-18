@@ -16,15 +16,23 @@
 		String searchString;
 		ArrayList<Element> numBooks;
 	%>
+	<h1 align="center">Search results</h1>
+	<table align="center">
+		<col width="200px" />
+		<col width="150px" />
+		<col width="250px" />
+		<tbody>
+			<tr>
+				<th><h2>Book Details</h2></th>
+				<th><h2>Price</h2></th>
+				<th><h2>Description</h2></th>
+			</tr>
 	<%
 		searchString = request.getParameter("search"); 
 		numBooks = XMLParser.find("searchString");
 		for (Element e : numBooks){
 	%>
-	<table border="1" align="center"><caption></caption>
-			<tbody>
-
-				<tr><td><img class="search_small_image" src="$smallpic"></td>
+			<tr>
 				<td>
 					
 					<br /><i><strong>Author: </strong></i><%=e.getElementsByTagName("author").item(0).getTextContent()%><br />
@@ -32,14 +40,12 @@
 					<br /><strong>Genre: </strong><%=e.getElementsByTagName("genre").item(0).getTextContent()%><br />
 					<br /><strong>Publish Date: </strong><%=e.getElementsByTagName("publish_date").item(0).getTextContent()%><br />
 				</td> 
-				<td align="right"><%=e.getElementsByTagName("price").item(0).getTextContent()%></td> 
-				<td>
-					<strong>Description: </strong><%=e.getElementsByTagName("description").item(0).getTextContent()%>
-
-				</td>
-				</tr>
-				</tbody>
+				<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
+				<td><%=e.getElementsByTagName("description").item(0).getTextContent()%></td>
+			</tr>
+			
 	<%	} %>
+		</tbody>
 
 
 </body>
