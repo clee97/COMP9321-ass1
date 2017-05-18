@@ -38,26 +38,31 @@
 				<th><h2>Add to Cart</h2>
 			</tr>
 	<% 
-		for (Element e : numBooks){
-			bookId = e.getAttribute("id");
+		if (numBooks.isEmpty()){
 	%>
-			<tr>
-				<td>
+		<h1>No results found.</h1>
+	<% 
+		}else{
+			for (Element e : numBooks){
+				bookId = e.getAttribute("id");
+	%>
+				<tr>
+					<td>
+						<br /><i><strong>Author: </strong></i><%=e.getElementsByTagName("author").item(0).getTextContent()%><br />
+						<br /><strong>Title: </strong><%=e.getElementsByTagName("title").item(0).getTextContent()%><br />
+						<br /><strong>Genre: </strong><%=e.getElementsByTagName("genre").item(0).getTextContent()%><br />
+						<br /><strong>Publish Date: </strong><%=e.getElementsByTagName("publish_date").item(0).getTextContent()%><br />
+					</td> 
 					
-					<br /><i><strong>Author: </strong></i><%=e.getElementsByTagName("author").item(0).getTextContent()%><br />
-					<br /><strong>Title: </strong><%=e.getElementsByTagName("title").item(0).getTextContent()%><br />
-					<br /><strong>Genre: </strong><%=e.getElementsByTagName("genre").item(0).getTextContent()%><br />
-					<br /><strong>Publish Date: </strong><%=e.getElementsByTagName("publish_date").item(0).getTextContent()%><br />
-				</td> 
-				
-				<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
-				<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
-				<td><input position="right" type="checkbox" id=<%=bookId%>></td>
-			</tr>
+					<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
+					<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
+					<td><input position="right" type="checkbox" id=<%=bookId%>></td>
+				</tr>
 			
-			
-			
-	<%	} %>
+	<%	
+			} 
+		}
+	%>
 		</tbody>
 
 
