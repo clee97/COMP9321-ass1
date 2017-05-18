@@ -23,6 +23,7 @@
 		searchString = (request.getParameter("search") == null) ? "Not Specified" : request.getParameter("search"); 
 		numBooks = XMLParser.find(searchBy, searchString);
 	%>
+	<%if (!numBooks.isEmpty()){ %>
 	<h1 align="center">Search Results For : <%=searchString %><a class="shopping_cart">Shopping Cart</a></h1>
 
 	<table align="center">
@@ -37,32 +38,32 @@
 				<th><h2>Price</h2></th>
 				<th><h2>Add to Cart</h2>
 			</tr>
+
 	<% 
-		if (numBooks.isEmpty()){
-	%>
-		<h1>No results found.</h1>
-	<% 
-		}else{
-			for (Element e : numBooks){
-				bookId = e.getAttribute("id");
-	%>
-				<tr>
-					<td>
-						<br /><i><strong>Author: </strong></i><%=e.getElementsByTagName("author").item(0).getTextContent()%><br />
-						<br /><strong>Title: </strong><%=e.getElementsByTagName("title").item(0).getTextContent()%><br />
-						<br /><strong>Genre: </strong><%=e.getElementsByTagName("genre").item(0).getTextContent()%><br />
-						<br /><strong>Publish Date: </strong><%=e.getElementsByTagName("publish_date").item(0).getTextContent()%><br />
-					</td> 
-					
-					<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
-					<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
-					<td><input position="right" type="checkbox" id=<%=bookId%>></td>
-				</tr>
-			
+
+		for (Element e : numBooks){
+			bookId = e.getAttribute("id");
+%>
+			<tr>
+				<td>
+					<br /><i><strong>Author: </strong></i><%=e.getElementsByTagName("author").item(0).getTextContent()%><br />
+					<br /><strong>Title: </strong><%=e.getElementsByTagName("title").item(0).getTextContent()%><br />
+					<br /><strong>Genre: </strong><%=e.getElementsByTagName("genre").item(0).getTextContent()%><br />
+					<br /><strong>Publish Date: </strong><%=e.getElementsByTagName("publish_date").item(0).getTextContent()%><br />
+				</td> 
+				
+				<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
+				<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
+				<td><input position="right" type="checkbox" id=<%=bookId%>></td>
+			</tr>
+		
 	<%	
 			} 
-		}
+		}else{
 	%>
+		<h1> No results found</h1>
+	
+	<%}%>
 		</tbody>
 
 
