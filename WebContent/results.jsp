@@ -15,11 +15,13 @@
 	<%!
 		String searchString;
 		String bookId;
+		String searchBy;
 		ArrayList<Element> numBooks;
 	%>
 	<%
+		searchBy = (request.getParameter("searchBy") == null) ? "" : request.getParameter("searchBy");
 		searchString = (request.getParameter("search") == null) ? "Not Specified" : request.getParameter("search"); 
-		numBooks = XMLParser.find("searchString");
+		numBooks = XMLParser.find(searchBy, searchString);
 	%>
 	<h1 align="center">Search Results For : <%=searchString %><a class="shopping_cart">Shopping Cart</a></h1>
 
