@@ -5,8 +5,9 @@ body {
 	text-align: center;
 }
 
-a {
+a.shopping_cart {
 	color: #2A679F;
+	float: right;
 }
 
 table {

@@ -13,6 +13,14 @@
 <form class="form-wrapper" action="results.jsp" method="post">
     <input type="text" name="search" id="search" placeholder="Search for..." required>
     <input type="submit" value="go" id="submit">
+    <a>Search By: 
+	    <select name="searchBy">
+	    	<option value="AUTHOR">Author</option>
+	    	<option value="TITLE">Title</option>
+	    	<option value="GENRE">Genre</option>
+	    	<option value="DESCRIPTION">Description</option>
+	    </select>
+	</a>
 </form>
 </body>
 </html>

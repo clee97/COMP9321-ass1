@@ -14,23 +14,30 @@
 <body>
 	<%!
 		String searchString;
+		String bookId;
 		ArrayList<Element> numBooks;
 	%>
-	<h1 align="center">Search results</h1>
+	<%
+		searchString = (request.getParameter("search") == null) ? "Not Specified" : request.getParameter("search"); 
+		numBooks = XMLParser.find("searchString");
+	%>
+	<h1 align="center">Search Results For : <%=searchString %><a class="shopping_cart">Shopping Cart</a></h1>
+
 	<table align="center">
-		<col width="200px" />
-		<col width="150px" />
-		<col width="250px" />
+		<col width="20%" />
+		<col width="15%" />
+		<col width="30%" />
+		<col width="15%"  />
 		<tbody>
 			<tr>
 				<th><h2>Book Details</h2></th>
 				<th><h2>Price</h2></th>
 				<th><h2>Description</h2></th>
+				<th><h2>Add to Cart</h2>
 			</tr>
-	<%
-		searchString = request.getParameter("search"); 
-		numBooks = XMLParser.find("searchString");
+	<% 
 		for (Element e : numBooks){
+			bookId = e.getAttribute("id");
 	%>
 			<tr>
 				<td>
@@ -41,8 +48,11 @@
 					<br /><strong>Publish Date: </strong><%=e.getElementsByTagName("publish_date").item(0).getTextContent()%><br />
 				</td> 
 				<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
-				<td><%=e.getElementsByTagName("description").item(0).getTextContent()%></td>
+				<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
+				<td><input position="right" type="checkbox" id=<%=bookId%>></td>
 			</tr>
+			
+			
 			
 	<%	} %>
 		</tbody>
