@@ -28,8 +28,9 @@ public class XMLParser {
 
 			for (int i = 0; i < nl.getLength(); i++){
 				Node n = nl.item(i);
-				Element e = (Element)n;
+				
 				if (n.getNodeType() == Node.ELEMENT_NODE){
+					Element e = (Element)n;
 					switch(searchBy){
 						case "AUTHOR" : 
 							if (p.matcher(e.getElementsByTagName("author").item(0).getTextContent()).find()){
@@ -60,6 +61,31 @@ public class XMLParser {
 			
 			return bookList;
 
+		} catch(Exception e){
+			e.printStackTrace(System.err);
+		}
+		return null;
+	}
+	
+	public static Element getElementById(String id){
+		try{
+			DOMParser domp = new DOMParser();
+
+	//		domp.parse("WebContent/dblp.xml");
+			domp.parse("../../../git/COMP9321-ass1/WebContent/dblp.xml");
+	//		domp.parse("../git/COMP9321-ass1/WebContent/dblp.xml");
+			
+			NodeList nl = domp.getDocument().getElementsByTagName("book");
+			
+			for (int i = 0; i < nl.getLength(); i++){
+				Node n = nl.item(i);
+				if (n.getNodeType() == Node.ELEMENT_NODE){
+					Element e = (Element)n;
+					if (e.getAttribute("id").equals(id)){
+						return e;
+					}
+				}
+			}
 		} catch(Exception e){
 			e.printStackTrace(System.err);
 		}
