@@ -24,7 +24,15 @@
 		numBooks = XMLParser.find(searchBy, searchString);
 	%>
 	<%if (!numBooks.isEmpty()){ %>
-	<h1 align="center">Search Results For : <%=searchString %><a class="shopping_cart">Shopping Cart</a></h1>
+	<form action="shopping_cart.jsp" method="post">
+	<div style="margin-right:10%;padding:1px 16px;height:1000px;">
+	<div style="float: right; margin-right: 15%;">
+	<ul>
+	  <li><a href="#home"><h2>Shopping Cart</h2><img src="pictures/shopping_cart.jpg" width="50px" height="50px"></a></li>
+	  <li><a href="search.jsp"><h2>Back to Search</h2></a></li>
+	</ul>
+	</div>
+	<h1 align="center"><a class="back_to_search">Back to Search</a>Search Results For : <%=searchString %></h1>
 
 	<table align="center">
 		<col width="35%" />
@@ -54,7 +62,7 @@
 				
 				<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
 				<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
-				<td><input position="right" type="checkbox" id=<%=bookId%>></td>
+				<td><input position="right" type="checkbox" id=<%=bookId%> value=<%=bookId%>></td>
 			</tr>
 		
 	<%	
@@ -64,7 +72,16 @@
 		<h1> No results found</h1>
 	
 	<%}%>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><input style="width: 150px; height: 40px" type="submit" value="Add Books To Cart"></td>
 		</tbody>
+	</table>
+	</form>
+	</div>
+	
 
 
 </body>
