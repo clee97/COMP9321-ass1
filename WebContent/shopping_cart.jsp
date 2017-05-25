@@ -26,7 +26,7 @@
 	
 %>
 <script src="js/shopping_cart.js"></script>
-<form id="refresh" action="shopping_cart.jsp">
+
 <div style="padding:1px 16px;height:1000px;">
 	<div style="float: right; margin-right: 20%;">
 		<ul>
@@ -47,16 +47,23 @@
 				
 			</tr>
 			<% 
-
+				keys = new HashSet<String>();
 				for (int i = 0; i < request.getCookies().length; i++){
-					Cookie c = request.getCookies()[i];
-					if (c.getValue().contains("bk")){
-						keys.add(c.getValue());
 					
-					}
+					Cookie c = request.getCookies()[i];
+
+					if (c.getValue() != null){
+						if (c.getValue().contains("bk")){
+
+							keys.add(c.getValue());
+						
+						}
+					}				
 				}
 
 				for (String s : request.getParameterMap().keySet()){
+
+					
 					if (s.contains("bk")){
 						keys.add(s);
 					}
@@ -66,12 +73,19 @@
 				formData = request.getParameterMap();
 				total = 0f;
 				for (String s: keys){
+					if (request.getParameter("deleteId") != null){
+						if (s.equals(request.getParameter("deleteId"))){
+							Cookie c = new Cookie(s, null);
+							c.setMaxAge(0);
+							response.addCookie(c);
+							continue;
+						}
+					}
 					response.addCookie(new Cookie(s, s));
 					
 					e = XMLParser.getElementById(s);
 					total += Float.parseFloat(e.getElementsByTagName("price").item(0).getTextContent());
 			%>			
-					<a><%=s %></a>
 					<tr>
 						<td>
 							<br /><i><strong>Author: </strong></i><%=e.getElementsByTagName("author").item(0).getTextContent()%><br />
@@ -83,7 +97,10 @@
 						<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
 						<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
 						<td>
-							<input type="button" value="Delete Item" onclick="deleteItem('<%=s%>')">
+							<form action="shopping_cart.jsp" method="post">
+							<input type="submit" value="Delete Item">
+							<input type="hidden" name="deleteId" value="<%=s %>">
+							</form>
 
 						</td>
 					</tr>
@@ -99,6 +116,6 @@
 		</tbody>
 	</table>
 </div>
-</form>
+
 </body>
 </html>
