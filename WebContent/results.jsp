@@ -82,16 +82,33 @@
 				
 			<%	
 					} 
-				}else{
 			%>
-				<h1> No results found</h1>
-			
-			<%}%>
 				<tr>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td><input style="width: 150px; height: 40px" type="submit" value="Add Books To Cart"></td>
+				</tr>
+			<% 
+				}else{
+			%>
+				<form class="form-wrapper" action="results.jsp" method="post">
+
+				    <input type="text" name="search" id="search" placeholder="Search again ..." required>
+				    <input type="submit" value="go" id="submit">
+				    <a>Search By: 
+					    <select name="searchBy">
+					    	<option value="AUTHOR">Author</option>
+					    	<option value="TITLE">Title</option>
+					    	<option value="GENRE">Genre</option>
+					    	<option value="DESCRIPTION">Description</option>
+					    </select>
+					</a>
+				</form>
+				<h1> No results found</h1>
+			
+			<%}%>
+
 				</tbody>
 			</table>
 		</div>

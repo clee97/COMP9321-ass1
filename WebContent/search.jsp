@@ -9,7 +9,13 @@
 
 </head>
 <body>
+<div style="float: right; margin-right: 20%;">
+	<ul>
+	  <li><a href="shopping_cart.jsp"><h2>Shopping Cart</h2><img src="pictures/shopping_cart.jpg" width="50px" height="50px"></a></li>
+	</ul>
+</div>
 <img src="pictures/search_logo.jpg" class="search_logo">
+
 <form class="form-wrapper" action="results.jsp" method="post">
     <input type="text" name="search" id="search" placeholder="Search for..." required>
     <input type="submit" value="go" id="submit">
