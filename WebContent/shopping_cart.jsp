@@ -19,6 +19,7 @@
 <%!
 	Map<String, String[]> formData = new HashMap<String, String[]>();
 	Set<String> keys = new HashSet<String>();
+	Set<String> deleteKeys = new HashSet<String>();
 	Element e;
 	Float total;
 %>
@@ -26,7 +27,7 @@
 	
 %>
 <script src="js/shopping_cart.js"></script>
-
+<form action="shopping_cart.jsp" method="post">
 <div style="padding:1px 16px;height:1000px;">
 	<div style="float: right; margin-right: 20%;">
 		<ul>
@@ -44,10 +45,12 @@
 				<th><h2>Book Details</h2></th>
 				<th><h2>Description</h2></th>
 				<th><h2>Price</h2></th>
+				<th><h2>Remove from Cart</h2></th>
 				
 			</tr>
 			<% 
 				keys = new HashSet<String>();
+				deleteKeys = new HashSet<String>();
 				for (int i = 0; i < request.getCookies().length; i++){
 					
 					Cookie c = request.getCookies()[i];
@@ -63,9 +66,10 @@
 
 				for (String s : request.getParameterMap().keySet()){
 
-					
-					if (s.contains("bk")){
+					if (s.startsWith("bk")){
 						keys.add(s);
+					}else{
+						deleteKeys.add(s.replace("delete", ""));
 					}
 				}
 				
@@ -73,13 +77,13 @@
 				formData = request.getParameterMap();
 				total = 0f;
 				for (String s: keys){
-					if (request.getParameter("deleteId") != null){
-						if (s.equals(request.getParameter("deleteId"))){
-							Cookie c = new Cookie(s, null);
-							c.setMaxAge(0);
-							response.addCookie(c);
-							continue;
-						}
+					if (deleteKeys.contains(s)){
+					
+						Cookie c = new Cookie(s, null);
+						c.setMaxAge(0);
+						response.addCookie(c);
+						continue;
+						
 					}
 					response.addCookie(new Cookie(s, s));
 					
@@ -97,11 +101,8 @@
 						<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
 						<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
 						<td>
-							<form action="shopping_cart.jsp" method="post">
-							<input type="submit" value="Delete Item">
-							<input type="hidden" name="deleteId" value="<%=s %>">
-							</form>
-
+							
+							<input type="checkbox" name="delete<%=s %>" value="<%=s %>">
 						</td>
 					</tr>
 			<%
@@ -109,13 +110,13 @@
 				}
 			%>
 		<tr>
-			<td></td>
+			<td><input type="submit" value="Remove from Cart"></td>
 			<td></td>
 			<td><h2>Check Out (Total: $<%=total%>)</h2></td>
 		</tr>
 		</tbody>
 	</table>
 </div>
-
+</form>
 </body>
 </html>
