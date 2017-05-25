@@ -21,11 +21,12 @@
 	Set<String> keys = new HashSet<String>();
 	Element e;
 	Float total;
-	int bookCounter;
 %>
 <%
 	
 %>
+<script src="js/shopping_cart.js"></script>
+<form id="refresh" action="shopping_cart.jsp">
 <div style="padding:1px 16px;height:1000px;">
 	<div style="float: right; margin-right: 20%;">
 		<ul>
@@ -43,37 +44,34 @@
 				<th><h2>Book Details</h2></th>
 				<th><h2>Description</h2></th>
 				<th><h2>Price</h2></th>
+				
 			</tr>
 			<% 
 
-					for (int i = 0; i < request.getCookies().length; i++){
-						Cookie c = request.getCookies()[i];
-						if (c.getValue().contains("bk")){
-							keys.add(c.getValue());
-						
-			%>
-						<a>Name: <%=c.getName() %></a>
-						<br>
-						<a>Value: <%=c.getValue()%></a>
-						<br>
-			<%
-						}
+				for (int i = 0; i < request.getCookies().length; i++){
+					Cookie c = request.getCookies()[i];
+					if (c.getValue().contains("bk")){
+						keys.add(c.getValue());
+					
 					}
+				}
 
-				keys.addAll(request.getParameterMap().keySet());
+				for (String s : request.getParameterMap().keySet()){
+					if (s.contains("bk")){
+						keys.add(s);
+					}
+				}
 				
 			
 				formData = request.getParameterMap();
 				total = 0f;
-				bookCounter = 0;
 				for (String s: keys){
-					bookCounter++;
 					response.addCookie(new Cookie(s, s));
 					
 					e = XMLParser.getElementById(s);
 					total += Float.parseFloat(e.getElementsByTagName("price").item(0).getTextContent());
 			%>			
-					
+					<a><%=s %></a>
 					<tr>
 						<td>
 							<br /><i><strong>Author: </strong></i><%=e.getElementsByTagName("author").item(0).getTextContent()%><br />
@@ -84,6 +82,10 @@
 						
 						<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
 						<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
+						<td>
+							<input type="button" value="Delete Item" onclick="deleteItem('<%=s%>')">
+
+						</td>
 					</tr>
 			<%
 					
@@ -97,5 +99,6 @@
 		</tbody>
 	</table>
 </div>
+</form>
 </body>
 </html>
