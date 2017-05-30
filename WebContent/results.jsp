@@ -105,7 +105,7 @@
 					    </select>
 					</a>
 				</form>
-				<h1> No results found</h1>
+				<h1> Sorry no matching datasets found!</h1>
 			
 			<%}%>
 

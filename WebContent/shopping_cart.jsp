@@ -40,14 +40,7 @@
 		<col width="35%" />
 		<col width="20%" />
 		<col width="20%"  />
-		<tbody>
-			<tr>
-				<th><h2>Book Details</h2></th>
-				<th><h2>Description</h2></th>
-				<th><h2>Price</h2></th>
-				<th><h2>Remove from Cart</h2></th>
-				
-			</tr>
+		
 			<% 
 				keys = new HashSet<String>();
 				deleteKeys = new HashSet<String>();
@@ -76,44 +69,69 @@
 			
 				formData = request.getParameterMap();
 				total = 0f;
-				for (String s: keys){
-					if (deleteKeys.contains(s)){
-					
+				if (keys.isEmpty() || (deleteKeys.size() == keys.size())){
+					for (String s : deleteKeys){
 						Cookie c = new Cookie(s, null);
 						c.setMaxAge(0);
 						response.addCookie(c);
-						continue;
+					}
+					%>
+						<h1>Shopping Cart is Empty!</h1>
+					<%
+				}else{
+					%>
+					<tbody>
+						<tr>
+							<th><h2>Book Details</h2></th>
+							<th><h2>Description</h2></th>
+							<th><h2>Price</h2></th>
+							<th><h2>Remove from Cart</h2></th>
+							
+						</tr>
+					<% 
+					for (String s: keys){
+						if (deleteKeys.contains(s)){
+						
+							Cookie c = new Cookie(s, null);
+							c.setMaxAge(0);
+							response.addCookie(c);
+							continue;
+							
+						}
+						response.addCookie(new Cookie(s, s));
+						
+						e = XMLParser.getElementById(s);
+						total += Float.parseFloat(e.getElementsByTagName("price").item(0).getTextContent());
+				%>			
+						<tr>
+							<td>
+								<br /><i><strong>Author: </strong></i><%=e.getElementsByTagName("author").item(0).getTextContent()%><br />
+								<br /><strong>Title: </strong><%=e.getElementsByTagName("title").item(0).getTextContent()%><br />
+								<br /><strong>Genre: </strong><%=e.getElementsByTagName("genre").item(0).getTextContent()%><br />
+								<br /><strong>Publish Date: </strong><%=e.getElementsByTagName("publish_date").item(0).getTextContent()%><br />
+							</td> 
+							
+							<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
+							<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
+							<td>
+								
+								<input type="checkbox" name="delete<%=s %>" value="<%=s %>">
+							</td>
+						</tr>
+				<%
 						
 					}
-					response.addCookie(new Cookie(s, s));
-					
-					e = XMLParser.getElementById(s);
-					total += Float.parseFloat(e.getElementsByTagName("price").item(0).getTextContent());
-			%>			
-					<tr>
-						<td>
-							<br /><i><strong>Author: </strong></i><%=e.getElementsByTagName("author").item(0).getTextContent()%><br />
-							<br /><strong>Title: </strong><%=e.getElementsByTagName("title").item(0).getTextContent()%><br />
-							<br /><strong>Genre: </strong><%=e.getElementsByTagName("genre").item(0).getTextContent()%><br />
-							<br /><strong>Publish Date: </strong><%=e.getElementsByTagName("publish_date").item(0).getTextContent()%><br />
-						</td> 
-						
-						<td><i><%=e.getElementsByTagName("description").item(0).getTextContent()%></i></td>
-						<td align="middle"><h1>$<%=e.getElementsByTagName("price").item(0).getTextContent()%></h1></td> 
-						<td>
-							
-							<input type="checkbox" name="delete<%=s %>" value="<%=s %>">
-						</td>
-					</tr>
-			<%
-					
+				%>
+				<tr>
+					<td><input type="submit" value="Remove from Cart"></td>
+					<td></td>
+					<td><h2>Check Out (Total: $<%=total%>)</h2></td>
+				</tr>
+				<%
+				
 				}
-			%>
-		<tr>
-			<td><input type="submit" value="Remove from Cart"></td>
-			<td></td>
-			<td><h2>Check Out (Total: $<%=total%>)</h2></td>
-		</tr>
+				%>
+		
 		</tbody>
 	</table>
 </div>
