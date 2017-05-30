@@ -9,9 +9,10 @@
 <title>Search Bar</title>
 
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
-
+<script src="js/shopping_cart.js"></script>
 </head>
 <body>
+
 	<%!
 		String searchString;
 		String bookId;
@@ -70,7 +71,7 @@
 			<input type="hidden" name="end" value="<%=end - 10 %>">
 		</form>
 	<%} %>
-	<form action="shopping_cart.jsp" method="post">
+	<form action="shopping_cart.jsp" id="add_items" method="post">
 		<div style="margin-right:10%;padding:1px 16px;height:1000px;">
 			
 			<h1 align="center">Search Results For : <%=searchString %></h1>
@@ -118,11 +119,17 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><input style="width: 150px; height: 40px" type="submit" value="Add Books To Cart"></td>
+					<td><button type="button" style="width: 150px; height: 40px" onclick="check_items()">Add Books To Cart</button></td>
 				</tr>
 			<% 
 				}else{
 			%>
+				<div style="float: right; margin-right: 20%;">
+					<ul>
+					  <li><a href="shopping_cart.jsp"><h2>Shopping Cart</h2><img src="pictures/shopping_cart.jpg" width="50px" height="50px"></a></li>
+					  <li><a href="search.jsp"><h2>Back to Search</h2></a></li>
+					</ul>
+				</div>
 				<form class="form-wrapper" action="results.jsp" method="post">
 
 				    <input type="text" name="search" id="search" placeholder="Search again ..." required>
