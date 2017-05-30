@@ -17,13 +17,21 @@
 		String bookId;
 		String searchBy;
 		ArrayList<Element> numBooks;
+		int start;
+		int end;
+		int counter;
 	%>
 	<%
 		searchBy = (request.getParameter("searchBy") == null) ? "" : request.getParameter("searchBy");
 		searchString = (request.getParameter("search") == null) ? "Not Specified" : request.getParameter("search"); 
 		numBooks = XMLParser.find(searchBy, searchString);
+		
+		start = (request.getParameter("start") == null) ? 0 : Integer.parseInt(request.getParameter("start"));
+		end = (request.getParameter("start") == null) ? 10 : Integer.parseInt(request.getParameter("end"));
+		counter = start;
 	%>
 	<%if (!numBooks.isEmpty()){ %>
+
 	<div style="float: right; margin-right: 20%;">
 		<ul>
 		  <li><a href="shopping_cart.jsp"><h2>Shopping Cart</h2><img src="pictures/shopping_cart.jpg" width="50px" height="50px"></a></li>
@@ -43,7 +51,25 @@
 	    </select>
 	</a>
 	</form>
-
+	<%if (!(end >= numBooks.size())){%>
+		<form action="results.jsp">
+			<input type="submit" value="next">
+	
+			<input type="hidden" name="search" value=<%=searchString%>>
+			<input type="hidden" name="searchBy" value=<%=searchBy%>>
+			<input type="hidden" name="start" value="<%=start + 10 %>">
+			<input type="hidden" name="end" value="<%=end + 10 %>">
+		</form>
+		<%} %>
+		<%if (start != 0 && end != 10){%>
+		<form action="results.jsp">
+			<input type="submit" value="prev">
+			<input type="hidden" name="search" value=<%=searchString%>>
+			<input type="hidden" name="searchBy" value=<%=searchBy%>>
+			<input type="hidden" name="start" value="<%=start - 10 %>">
+			<input type="hidden" name="end" value="<%=end - 10 %>">
+		</form>
+	<%} %>
 	<form action="shopping_cart.jsp" method="post">
 		<div style="margin-right:10%;padding:1px 16px;height:1000px;">
 			
@@ -64,7 +90,11 @@
 		
 			<% 
 		
-				for (Element e : numBooks){
+				for (int i = start; i < numBooks.size(); i++){
+					Element e = numBooks.get(i);
+					if (counter == end){
+						break;
+					}
 					bookId = e.getAttribute("id");
 			%>
 					<tr>
@@ -81,7 +111,8 @@
 					</tr>
 				
 			<%	
-					} 
+					counter++;
+				} 
 			%>
 				<tr>
 					<td></td>

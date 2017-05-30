@@ -16,9 +16,11 @@
 </div>
 <img src="pictures/search_logo.jpg" class="search_logo">
 
-<form class="form-wrapper" action="results.jsp" method="post">
+<form class="form-wrapper" action="results.jsp" method="get">
     <input type="text" name="search" id="search" placeholder="Search for..." required>
     <input type="submit" value="go" id="submit">
+    <input type="hidden" name="start" value="0">
+    <input type="hidden" name="end" value="10">
     <a>Search By: 
 	    <select name="searchBy">
 	    	<option value="AUTHOR">Author</option>
