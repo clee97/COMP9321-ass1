@@ -16,7 +16,7 @@
 </div>
 <img src="pictures/search_logo.jpg" class="search_logo">
 
-<form class="form-wrapper" action="results.jsp" method="get">
+<form class="form-wrapper" action="API" method="get">
     <input type="text" name="search" id="search" placeholder="Search for..." required>
     <input type="submit" value="go" id="submit">
     <input type="hidden" name="start" value="0">
