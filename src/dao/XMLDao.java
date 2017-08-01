@@ -1,4 +1,4 @@
-package helpers;
+package dao;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -9,7 +9,7 @@ import org.w3c.dom.NodeList;
 
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
-public class XMLParser {
+public class XMLDao {
 	public static void main(String[] args) {
 		Pattern p = Pattern.compile("sasa");
 		System.out.println(p.matcher("hello world").find());
