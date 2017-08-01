@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.SearchRequest;
+
 /**
  * Main Servlet which controls what the system does
  */
@@ -24,7 +26,10 @@ public class MainApi extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if (action.equals("search")){
-			request.setAttribute("working", "yea");
+			SearchRequest sr = new SearchRequest(request.getParameter("book-title"), Integer.parseInt(request.getParameter("book-year")), 
+					request.getParameter("book-isbn"), request.getParameter("book-authors"), request.getParameter("book-venue"));
+			
+			
 			request.getRequestDispatcher("results.jsp").forward(request, response);
 		}
 	}

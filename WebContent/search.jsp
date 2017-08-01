@@ -36,8 +36,8 @@
       <input type="text" class="form-control" id="book-isbn" placeholder="In the form " name="book-isbn">
     </div>
     <div class="form-group">
-      <label for="book-author">Author(s):</label>
-      <input type="text" class="form-control" id="book-author" placeholder="Use commas as separators ','" name="book-author">
+      <label for="book-authors">Author(s):</label>
+      <input type="text" class="form-control" id="book-authors" placeholder="Use commas as separators ','" name="book-authors">
     </div>
     <div class="form-group">
       <label for="book-venue">Venue:</label>
