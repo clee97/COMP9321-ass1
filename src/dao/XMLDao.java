@@ -28,19 +28,22 @@ public class XMLDao {
 	public static List<Book> search(SearchRequest request) {
 		String expression = "";
 		List<String> filters = new ArrayList<String>();
-		if (request.getTitle() != null){
+		System.out.println(request.getAuthors().length());
+		System.out.println(request.getVolume().length());
+		System.out.println(request.getJournal().length());
+		if (request.getTitle() != null && !request.getTitle().isEmpty()){
 			filters.add("contains(title, '" + request.getTitle() + "')");
 		}
-		if (request.getAuthors() != null){
+		if (request.getAuthors() != null && !request.getAuthors().isEmpty()){
 			filters.add("contains(author, '" + request.getAuthors() + "')");
 		}
 		if (request.getYear() != null){
 			filters.add("contains(year, '" + request.getYear() + "')");
 		}
-		if (request.getVolume() != null){
+		if (request.getVolume() != null && !request.getVolume().isEmpty()){
 			filters.add("contains(volume, '" + request.getVolume() + "')");
 		}
-		if (request.getJournal() != null){
+		if (request.getJournal() != null && !request.getJournal().isEmpty() ){
 			filters.add("contains(journal, '" + request.getJournal() + "')");
 		}
 		if (!filters.isEmpty()){

@@ -14,7 +14,7 @@
 List<Book> results = (List<Book>)request.getAttribute("searchResults");
 %>
 <c:forEach items="${results}" var="book">
-<a>${book.title }</a>
+<a><c:out value="${book.title}"/></a>
 <a>===============</a>
 </c:forEach>
 </body>

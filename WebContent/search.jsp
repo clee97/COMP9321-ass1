@@ -13,6 +13,7 @@
 <div class="container">
   <h2>Online Book Store Search</h2>
   <form action="API" method="GET">
+  	<input type="hidden" name="action" value="search">
     <div class="form-group">
       <label for="book-title">Title:</label>
       <input type="text" class="form-control" id="book-title" placeholder="Enter Book Title" name="book-title">
