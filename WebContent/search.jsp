@@ -24,24 +24,20 @@
       <label><input type="checkbox" name="type-conference"> Conference</label>
     </div>
     <div class="form-group">
-      <label for="book-publisher">Publisher:</label>
-      <input type="text" class="form-control" id="book-publisher" placeholder="Enter Publisher" name="book-publisher">
+      <label for="book-journal">Journal:</label>
+      <input type="text" class="form-control" id="book-journal" placeholder="Enter Journal" name="book-journal">
     </div>
     <div class="form-group">
       <label for="book-year">Year:</label>
       <input type="text" class="form-control" id="book-year" placeholder="Enter Year" name="book-year">
     </div>
     <div class="form-group">
-      <label for="book-isbn">IBSN:</label>
-      <input type="text" class="form-control" id="book-isbn" placeholder="In the form " name="book-isbn">
-    </div>
-    <div class="form-group">
       <label for="book-authors">Author(s):</label>
       <input type="text" class="form-control" id="book-authors" placeholder="Use commas as separators ','" name="book-authors">
     </div>
     <div class="form-group">
-      <label for="book-venue">Venue:</label>
-      <input type="text" class="form-control" id="book-venue" placeholder="Enter Venue" name="book-venue">
+      <label for="book-volume">Volume:</label>
+      <input type="text" class="form-control" id="book-volume" placeholder="Enter Volume" name="book-volume">
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
   </form>

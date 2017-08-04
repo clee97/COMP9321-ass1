@@ -9,15 +9,43 @@ public class Book {
 	
 	private List<String> authors;
 	
-	private String publisher;
-	
 	private Integer year;
 	
-	private String isbn;
+	private String volume;
 	
-	private String venue;
-
+	private String journal;
+	
+	private String pages;
+	
+	private String url;
+	
+	private String ee;
+	
 	public Book() {}
+	
+	public String getPages() {
+		return pages;
+	}
+
+	public void setPages(String pages) {
+		this.pages = pages;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getEe() {
+		return ee;
+	}
+
+	public void setEe(String ee) {
+		this.ee = ee;
+	}
 
 	public String getTitle() {
 		return title;
@@ -39,12 +67,12 @@ public class Book {
 		this.authors = authors;
 	}
 
-	public String getPublisher() {
-		return publisher;
+	public String getVolume() {
+		return volume;
 	}
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
+	public void setVolume(String volume) {
+		this.volume = volume;
 	}
 
 	public Integer getYear() {
@@ -54,20 +82,13 @@ public class Book {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-
-	public String getIsbn() {
-		return isbn;
+	
+	public String getJournal() {
+		return journal;
 	}
 
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
+	public void setJournal(String journal) {
+		this.journal = journal;
 	}
 
-	public String getVenue() {
-		return venue;
-	}
-
-	public void setVenue(String venue) {
-		this.venue = venue;
-	}
 }

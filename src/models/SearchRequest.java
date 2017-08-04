@@ -1,23 +1,27 @@
 package models;
 
+import java.util.List;
+
 public class SearchRequest {
 
 	private String title;
 	
-	private Integer year;
-	
-	private String isbn;
-	
 	private String authors;
 	
-	private String venue;
+	private Integer year;
+	
+	private String volume;
+	
+	private String journal;
+	
 
-	public SearchRequest(String title, Integer year, String isbn, String authors, String venue) {
+	public SearchRequest(String title, String authors, Integer year, String volume, String journal) {
+		super();
 		this.title = title;
-		this.year = year;
-		this.isbn = isbn;
 		this.authors = authors;
-		this.venue = venue;
+		this.year = year;
+		this.volume = volume;
+		this.journal = journal;
 	}
 
 	public String getTitle() {
@@ -28,22 +32,6 @@ public class SearchRequest {
 		this.title = title;
 	}
 
-	public Integer getYear() {
-		return year;
-	}
-
-	public void setYear(Integer year) {
-		this.year = year;
-	}
-
-	public String getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
-
 	public String getAuthors() {
 		return authors;
 	}
@@ -52,13 +40,29 @@ public class SearchRequest {
 		this.authors = authors;
 	}
 
-	public String getVenue() {
-		return venue;
+	public Integer getYear() {
+		return year;
 	}
 
-	public void setVenue(String venue) {
-		this.venue = venue;
+	public void setYear(Integer year) {
+		this.year = year;
 	}
-	
-	
+
+	public String getVolume() {
+		return volume;
+	}
+
+	public void setVolume(String volume) {
+		this.volume = volume;
+	}
+
+	public String getJournal() {
+		return journal;
+	}
+
+	public void setJournal(String journal) {
+		this.journal = journal;
+	}
+
+
 }

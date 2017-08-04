@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.XMLDao;
+import models.Book;
 import models.SearchRequest;
 
 /**
@@ -26,10 +28,11 @@ public class MainApi extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if (action.equals("search")){
-			SearchRequest sr = new SearchRequest(request.getParameter("book-title"), Integer.parseInt(request.getParameter("book-year")), 
-					request.getParameter("book-isbn"), request.getParameter("book-authors"), request.getParameter("book-venue"));
+			SearchRequest sr = new SearchRequest(request.getParameter("book-title"), request.getParameter("book-authors"), Integer.parseInt(request.getParameter("book-year")), 
+					request.getParameter("book-volume"), request.getParameter("book-journal"));
 			
-			
+			List<Book> results = XMLDao.search(sr);
+			request.setAttribute("searchResults", results);
 			request.getRequestDispatcher("results.jsp").forward(request, response);
 		}
 	}
