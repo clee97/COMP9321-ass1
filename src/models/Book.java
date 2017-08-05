@@ -3,7 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
+public class Book implements java.io.Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private String title;
 	

@@ -15,12 +15,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.sun.org.apache.xerces.internal.parsers.DOMParser;
-
 import models.Book;
 import models.SearchRequest;
 
 public class XMLDao {
+	
+	private static Document doc;
+	
 	public static void main(String[] args) {
 		SearchRequest request = new SearchRequest("Parallel", null, 1996, null, null);
 		search(request);
@@ -28,9 +29,6 @@ public class XMLDao {
 	public static List<Book> search(SearchRequest request) {
 		String expression = "";
 		List<String> filters = new ArrayList<String>();
-		System.out.println(request.getAuthors().length());
-		System.out.println(request.getVolume().length());
-		System.out.println(request.getJournal().length());
 		if (request.getTitle() != null && !request.getTitle().isEmpty()){
 			filters.add("contains(title, '" + request.getTitle() + "')");
 		}
@@ -54,14 +52,7 @@ public class XMLDao {
 		System.out.println(expression);
 		List<Book> results = new ArrayList<Book>();
 		try{
-			File inputFile = new File("dataset/dblp.xml");
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			dbFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
-			dbFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(inputFile);
-			doc.getDocumentElement().normalize();
-
+			initXMLdoc();
 			XPath xPath =  XPathFactory.newInstance().newXPath();
 			NodeList nl = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
 			
@@ -101,28 +92,19 @@ public class XMLDao {
 
 	}
 	
-	public static Element getElementById(String id){
-		try{
-			DOMParser domp = new DOMParser();
-
-	//		domp.parse("WebContent/dblp.xml");
-//			domp.parse("../../../git/COMP9321-ass1/WebContent/dblp.xml");
-			domp.parse("../git/COMP9321-ass1/dataset/dblp.xml");
-			
-			NodeList nl = domp.getDocument().getElementsByTagName("book");
-			
-			for (int i = 0; i < nl.getLength(); i++){
-				Node n = nl.item(i);
-				if (n.getNodeType() == Node.ELEMENT_NODE){
-					Element e = (Element)n;
-					if (e.getAttribute("id").equals(id)){
-						return e;
-					}
-				}
-			}
-		} catch(Exception e){
-			e.printStackTrace(System.err);
+	private static void initXMLdoc() {
+		File inputFile = new File("dataset/dblp.xml");
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		try {
+			dbFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+			dbFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document document = dBuilder.parse(inputFile);
+			document.getDocumentElement().normalize();
+			doc = document;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return null;
+		
 	}
 }
