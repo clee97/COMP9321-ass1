@@ -24,9 +24,15 @@ public class XMLDao {
 	
 	public static void main(String[] args) {
 		SearchRequest request = new SearchRequest("Sanjeev", null, null, null, null);
-		search(request);
+		XMLDao dao = new XMLDao();
+		dao.search(request);
 	}
-	public static List<Book> search(SearchRequest request) {
+	
+	public XMLDao() {
+		initXMLdoc();
+	}
+	
+	public List<Book> search(SearchRequest request) {
 		String expression = "";
 		List<String> filters = new ArrayList<String>();
 		if (request.getTitle() != null && !request.getTitle().isEmpty()){
@@ -92,7 +98,7 @@ public class XMLDao {
 
 	}
 	
-	private static void initXMLdoc() {
+	private void initXMLdoc() {
 		File inputFile = new File("dataset/dblp.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		try {

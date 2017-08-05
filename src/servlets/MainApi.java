@@ -31,7 +31,8 @@ public class MainApi extends HttpServlet {
 			SearchRequest sr = new SearchRequest(request.getParameter("book-title"), request.getParameter("book-authors"), Integer.parseInt(request.getParameter("book-year")), 
 					request.getParameter("book-volume"), request.getParameter("book-journal"));
 			
-			List<Book> results = XMLDao.search(sr);
+			XMLDao dao = new XMLDao();
+			List<Book> results = dao.search(sr);
 			request.setAttribute("searchResults", results);
 			request.getRequestDispatcher("results.jsp").forward(request, response);
 		}
