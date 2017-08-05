@@ -23,7 +23,7 @@ public class XMLDao {
 	private static Document doc;
 	
 	public static void main(String[] args) {
-		SearchRequest request = new SearchRequest("Parallel", null, 1996, null, null);
+		SearchRequest request = new SearchRequest("Sanjeev", null, null, null, null);
 		search(request);
 	}
 	public static List<Book> search(SearchRequest request) {

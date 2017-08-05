@@ -12,10 +12,10 @@
 <body>
 <%
 List<Book> results = (List<Book>)request.getAttribute("searchResults");
+for (Book b : results){
 %>
-<c:forEach items="${results}" var="book">
-<a><c:out value="${book.title}"/></a>
-<a>===============</a>
-</c:forEach>
+<a><%=b.getTitle()%></a><br>
+<a><%=b.getAuthors()%></a><br>
+<%} %>
 </body>
 </html>
