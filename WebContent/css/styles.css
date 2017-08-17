@@ -1,176 +1,25 @@
-body {
-	background: #eee;
-	font: 12px Lucida sans, Arial, Helvetica, sans-serif;
-	color: #333;
-	text-align: center;
-}
+@import "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700";
 
-div.nav_bar {
-	float: right;
-	position: fixed;
-	margin-right: 10%;
-}
+.container { margin-top: 20px; }
+.mb20 { margin-bottom: 20px; } 
 
-ul {
-    list-style-type: none;
-    float: right;
-    padding: 0;
-    width: 20%;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 25%;
-    overflow: auto;
-}
+hgroup { padding-left: 15px; border-bottom: 1px solid #ccc; }
+hgroup h1 { font: 500 normal 1.625em "Roboto",Arial,Verdana,sans-serif; color: #2a3644; margin-top: 0; line-height: 1.15; }
+hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; color: #2a3644; margin: 0; padding-bottom: 10px; }
 
-
-li a {
-    display: block;
-    height: 10%
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-
-li a:hover:not(.active) {
-    background-color: #555;
-    color: white;
-}
-
-table {
-    border-collapse: collapse;
-    table-layout: fixed;
-    width: 60%;
-}
-
-th, td {
-    text-align: left;
-    padding: 10px;
-}
-
-tr:nth-child(even){background-color: #f2f2f2}
-
-th {
-    background-color: #4CAF50;
-    color: white;
-}
-
-/*========*/
-.search_logo{
-	height: 250px;
-	width: 250px;
-}
-img.search_small_image {
-	width: 300px;
-	table-layout: fixed;
-}
-.form-wrapper {
-	background-color: #f6f6f6;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#eae8e8));
-	background-image: -webkit-linear-gradient(top, #f6f6f6, #eae8e8);
-	background-image: -moz-linear-gradient(top, #f6f6f6, #eae8e8);
-	background-image: -ms-linear-gradient(top, #f6f6f6, #eae8e8);
-	background-image: -o-linear-gradient(top, #f6f6f6, #eae8e8);
-	background-image: linear-gradient(top, #f6f6f6, #eae8e8);
-	border-color: #dedede #bababa #aaa #bababa;
-	border-style: solid;
-	border-width: 1px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	-webkit-box-shadow: 0 3px 3px rgba(255,255,255,.1), 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 5px #444;
-	-moz-box-shadow: 0 3px 3px rgba(255,255,255,.1), 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 5px #444;
-	box-shadow: 0 3px 3px rgba(255,255,255,.1), 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 5px #444;
-	margin: 30px auto;
-	overflow: hidden;
-	padding: 8px;
-	width: 450px;
-}
-
-.form-wrapper #search {
-	border: 1px solid #CCC;
-	-webkit-box-shadow: 0 1px 1px #ddd inset, 0 1px 0 #FFF;
-	-moz-box-shadow: 0 1px 1px #ddd inset, 0 1px 0 #FFF;
-	box-shadow: 0 1px 1px #ddd inset, 0 1px 0 #FFF;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-    color: #999;
-	float: left;
-	font: 16px Lucida Sans, Trebuchet MS, Tahoma, sans-serif;
-	height: 40px;
-	padding: 10px;
-	width: 320px;
-}
-
-.form-wrapper #search:focus {
-	border-color: #aaa;
-	-webkit-box-shadow: 0 1px 1px #bbb inset;
-	-moz-box-shadow: 0 1px 1px #bbb inset;
-	box-shadow: 0 1px 1px #bbb inset;
-	outline: 0;
-}
-
-.form-wrapper #search:-moz-placeholder,
-.form-wrapper #search:-ms-input-placeholder,
-.form-wrapper #search::-webkit-input-placeholder {
-	color: #999;
-	font-weight: normal;
-}
-
-.form-wrapper #submit {
-	background-color: #0483a0;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#31b2c3), to(#0483a0));
-	background-image: -webkit-linear-gradient(top, #31b2c3, #0483a0);
-	background-image: -moz-linear-gradient(top, #31b2c3, #0483a0);
-	background-image: -ms-linear-gradient(top, #31b2c3, #0483a0);
-	background-image: -o-linear-gradient(top, #31b2c3, #0483a0);
-	background-image: linear-gradient(top, #31b2c3, #0483a0);
-	border: 1px solid #00748f;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #FFF;
-	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #FFF;
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #FFF;
-	color: #fafafa;
-	cursor: pointer;
-	height: 42px;
-	float: right;
-	font: 15px Arial, Helvetica;
-	padding: 0;
-	text-transform: uppercase;
-	text-shadow: 0 1px 0 rgba(0, 0 ,0, .3);
-	width: 100px;
-}
-
-.form-wrapper #submit:hover,
-.form-wrapper #submit:focus {
-	background-color: #31b2c3;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#0483a0), to(#31b2c3));
-	background-image: -webkit-linear-gradient(top, #0483a0, #31b2c3);
-	background-image: -moz-linear-gradient(top, #0483a0, #31b2c3);
-	background-image: -ms-linear-gradient(top, #0483a0, #31b2c3);
-	background-image: -o-linear-gradient(top, #0483a0, #31b2c3);
-	background-image: linear-gradient(top, #0483a0, #31b2c3);
-}
-
-.form-wrapper #submit:active {
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
-	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
-	outline: 0;
-}
-
-.form-wrapper #submit::-moz-focus-inner {
-	border: 0;
-}
-
-
-
-h1 {
-  font-family: Verdana;
-  font-weight: normal;
-  color: #024457;
-  span {color: #167F92;}
-}
+.search-result .thumbnail { border-radius: 0 !important; }
+.search-result:first-child { margin-top: 0 !important; }
+.search-result { margin-top: 20px; }
+.search-result .col-md-2 { border-right: 1px dotted #ccc; min-height: 140px; }
+.search-result ul { padding-left: 0 !important; list-style: none;  }
+.search-result ul li { font: 400 normal .85em "Roboto",Arial,Verdana,sans-serif;  line-height: 30px; }
+.search-result ul li i { padding-right: 5px; }
+.search-result .col-md-7 { position: relative; }
+.search-result h3 { font: 500 normal 1.375em "Roboto",Arial,Verdana,sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
+.search-result h3 > a, .search-result i { color: #248dc1 !important; }
+.search-result p { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; } 
+.search-result span.plus { position: absolute; right: 0; top: 126px; }
+.search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
+.search-result span.plus a:hover { background-color: #414141; }
+.search-result span.plus a i { color: #fff !important; }
+.search-result span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }
