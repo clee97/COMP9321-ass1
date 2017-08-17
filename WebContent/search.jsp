@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -15,30 +14,24 @@
   <form action="API" method="GET">
   	<input type="hidden" name="action" value="search">
     <div class="form-group">
-      <label for="book-title">Title:</label>
-      <input type="text" class="form-control" id="book-title" placeholder="Enter Book Title" name="book-title">
-    </div>
-    <div class="checkbox">
-      <label>Publication Type: </label>
-      <label><input type="checkbox" name="type-book"> Book</label>
-      <label><input type="checkbox" name="type-journal"> Journal</label>
-      <label><input type="checkbox" name="type-conference"> Conference</label>
+      <label for="entry-agency">Agency:</label>
+      <input type="text" class="form-control" id="entry-agency" placeholder="Enter Agency" name="entry-agency">
     </div>
     <div class="form-group">
-      <label for="book-journal">Journal:</label>
-      <input type="text" class="form-control" id="book-journal" placeholder="Enter Journal" name="book-journal">
+      <label for="entry-headline">Headline:</label>
+      <input type="text" class="form-control" id="entry-headline" placeholder="Enter Headline" name="entry-headline">
     </div>
     <div class="form-group">
-      <label for="book-year">Year:</label>
-      <input type="text" class="form-control" id="book-year" placeholder="Enter Year" name="book-year">
+      <label for="entry-date">Date:</label>
+      <input type="text" class="form-control" id="entry-date" placeholder="Enter Date" name="entry-date">
     </div>
     <div class="form-group">
-      <label for="book-authors">Author(s):</label>
-      <input type="text" class="form-control" id="book-authors" placeholder="Use commas as separators ','" name="book-authors">
+      <label for="entry-city">City:</label>
+      <input type="text" class="form-control" id="entry-city" placeholder="Enter City" name="entry-city">
     </div>
     <div class="form-group">
-      <label for="book-volume">Volume:</label>
-      <input type="text" class="form-control" id="book-volume" placeholder="Enter Volume" name="book-volume">
+      <label for="entry-content">Content:</label>
+      <input type="text" class="form-control" id="book-title" placeholder="Enter Content" name="entry-content">
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
   </form>

@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import models.Book;
+import models.Entry;
 import models.SearchRequest;
 
 public class XMLDao {
@@ -32,23 +32,23 @@ public class XMLDao {
 		initXMLdoc();
 	}
 	
-	public List<Book> search(SearchRequest request) {
+	public List<Entry> search(SearchRequest request) {
 		String expression = "";
 		List<String> filters = new ArrayList<String>();
-		if (request.getTitle() != null && !request.getTitle().isEmpty()){
-			filters.add("contains(title, '" + request.getTitle() + "')");
+		if (request.getAgency() != null && !request.getAgency().isEmpty()){
+			filters.add("contains(agency, '" + request.getAgency() + "')");
 		}
-		if (request.getAuthors() != null && !request.getAuthors().isEmpty()){
-			filters.add("contains(author, '" + request.getAuthors() + "')");
+		if (request.getHeadline() != null && !request.getHeadline().isEmpty()){
+			filters.add("contains(headline, '" + request.getHeadline() + "')");
 		}
-		if (request.getYear() != null){
-			filters.add("contains(year, '" + request.getYear() + "')");
+		if (request.getDate() != null && !request.getDate().isEmpty()){
+			filters.add("contains(year, '" + request.getDate() + "')");
 		}
-		if (request.getVolume() != null && !request.getVolume().isEmpty()){
-			filters.add("contains(volume, '" + request.getVolume() + "')");
+		if (request.getCity() != null && !request.getCity().isEmpty()){
+			filters.add("contains(city, '" + request.getCity() + "')");
 		}
-		if (request.getJournal() != null && !request.getJournal().isEmpty() ){
-			filters.add("contains(journal, '" + request.getJournal() + "')");
+		if (request.getContent() != null && !request.getContent().isEmpty() ){
+			filters.add("contains(content, '" + request.getContent() + "')");
 		}
 		if (!filters.isEmpty()){
 			expression = "/dblp/article[" + String.join(" and ", filters) + "]";
@@ -56,7 +56,7 @@ public class XMLDao {
 			expression = "/dblp/article";
 		}
 		System.out.println(expression);
-		List<Book> results = new ArrayList<Book>();
+		List<Entry> results = new ArrayList<Entry>();
 		try{
 			initXMLdoc();
 			XPath xPath =  XPathFactory.newInstance().newXPath();
@@ -78,16 +78,13 @@ public class XMLDao {
 					System.out.println(e.getElementsByTagName("ee").item(0).getTextContent()) ;
 					System.out.println("===============================");
 					
-					Book b = new Book();
-					b.getAuthors().add(e.getElementsByTagName("author").item(0).getTextContent());
-					b.setTitle(e.getElementsByTagName("title").item(0).getTextContent());
-					b.setJournal((e.getElementsByTagName("journal").item(0).getTextContent()));
-					b.setVolume(e.getElementsByTagName("volume").item(0).getTextContent());
-					b.setYear(Integer.parseInt(e.getElementsByTagName("year").item(0).getTextContent()));
-					b.setPages(e.getElementsByTagName("pages").item(0).getTextContent());
-					b.setUrl(e.getElementsByTagName("url").item(0).getTextContent());
-					b.setEe(e.getElementsByTagName("ee").item(0).getTextContent());
-					results.add(b);
+					Entry entry = new Entry();
+					entry.setAgency(e.getElementsByTagName("agency").item(0).getTextContent());
+					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
+					entry.setDate(e.getElementsByTagName("date").item(0).getTextContent());
+					entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
+					entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
+					results.add(entry);
 					
 				}
 			}
@@ -99,7 +96,7 @@ public class XMLDao {
 	}
 	
 	private void initXMLdoc() {
-		File inputFile = new File("dataset/dblp.xml");
+		File inputFile = new File("dataset/rows.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		try {
 			dbFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.XMLDao;
-import models.Book;
+import models.Entry;
 import models.SearchRequest;
 
 /**
@@ -28,11 +28,11 @@ public class MainApi extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if (action.equals("search")){
-			SearchRequest sr = new SearchRequest(request.getParameter("book-title"), request.getParameter("book-authors"), Integer.parseInt(request.getParameter("book-year")), 
-					request.getParameter("book-volume"), request.getParameter("book-journal"));
+			SearchRequest sr = new SearchRequest(request.getParameter("entry-agency"), request.getParameter("entry-headline"), request.getParameter("entry-date"), 
+					request.getParameter("entry-date"), request.getParameter("entry-content"));
 			
 			XMLDao dao = new XMLDao();
-			List<Book> results = dao.search(sr);
+			List<Entry> results = dao.search(sr);
 			request.setAttribute("searchResults", results);
 			request.getRequestDispatcher("results.jsp").forward(request, response);
 		}

@@ -1,8 +1,11 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SearchRequest {
+public class Entry implements java.io.Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private String agency;
 	
@@ -13,14 +16,8 @@ public class SearchRequest {
 	private String city;
 	
 	private String content;
-
-	public SearchRequest(String agency, String headline, String date, String city, String content) {
-		this.agency = agency;
-		this.headline = headline;
-		this.date = date;
-		this.city = city;
-		this.content = content;
-	}
+	
+	public Entry(){};
 
 	public String getAgency() {
 		return agency;
@@ -62,7 +59,5 @@ public class SearchRequest {
 		this.content = content;
 	}
 	
-
 	
-
 }
