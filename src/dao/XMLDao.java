@@ -2,7 +2,10 @@ package dao;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,9 +26,10 @@ public class XMLDao {
 	private static Document doc;
 	
 	public static void main(String[] args) {
-		SearchRequest request = new SearchRequest("Sanjeev", null, null, null, null);
+		//SearchRequest request = new SearchRequest("Department of Consumer and Business Services", null, null, null, null);
 		XMLDao dao = new XMLDao();
-		dao.search(request);
+		//dao.search(request);
+		dao.randomise(10);
 	}
 	
 	public XMLDao() {
@@ -42,7 +46,7 @@ public class XMLDao {
 			filters.add("contains(headline, '" + request.getHeadline() + "')");
 		}
 		if (request.getDate() != null && !request.getDate().isEmpty()){
-			filters.add("contains(year, '" + request.getDate() + "')");
+			filters.add("contains(publish_date, '" + request.getDate() + "')");
 		}
 		if (request.getCity() != null && !request.getCity().isEmpty()){
 			filters.add("contains(city, '" + request.getCity() + "')");
@@ -51,14 +55,13 @@ public class XMLDao {
 			filters.add("contains(content, '" + request.getContent() + "')");
 		}
 		if (!filters.isEmpty()){
-			expression = "/dblp/article[" + String.join(" and ", filters) + "]";
+			expression = "/response/row/row[" + String.join(" and ", filters) + "]";
 		}else{
-			expression = "/dblp/article";
+			expression = "/response/row/row";
 		}
 		System.out.println(expression);
 		List<Entry> results = new ArrayList<Entry>();
 		try{
-			initXMLdoc();
 			XPath xPath =  XPathFactory.newInstance().newXPath();
 			NodeList nl = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
 			
@@ -67,23 +70,19 @@ public class XMLDao {
 				if (n.getNodeType() == Node.ELEMENT_NODE){
 					Element e = (Element)n;
 					/*debug stuff*/
-					System.out.println("Book Key: " + e.getAttribute("key")) ;
-					System.out.println(e.getElementsByTagName("author").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("title").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("journal").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("volume").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("year").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("pages").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("url").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("ee").item(0).getTextContent()) ;
+					System.out.println(e.getAttribute("_address"));
+					System.out.println(e.getElementsByTagName("agency").item(0).getTextContent()) ;
+					System.out.println(e.getElementsByTagName("headline").item(0).getTextContent()) ;
+					System.out.println(e.getElementsByTagName("publish_date").item(0).getTextContent()) ;
+					System.out.println(e.getElementsByTagName("city").item(0).getTextContent()) ;
 					System.out.println("===============================");
 					
 					Entry entry = new Entry();
 					entry.setAgency(e.getElementsByTagName("agency").item(0).getTextContent());
 					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
-					entry.setDate(e.getElementsByTagName("date").item(0).getTextContent());
+					entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
 					entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
-					entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
+					if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
 					results.add(entry);
 					
 				}
@@ -93,6 +92,46 @@ public class XMLDao {
 		}
 		return results;
 
+	}
+	
+	public List<Entry> randomise(Integer count){
+		List<Entry> results = new ArrayList<Entry>();
+		List<Entry> randomList = new ArrayList<Entry>();
+		try{
+			XPath xPath =  XPathFactory.newInstance().newXPath();
+			NodeList nl = (NodeList) xPath.compile("/response/row/row").evaluate(doc, XPathConstants.NODESET);
+			
+			for (int i = 0; i < nl.getLength(); i++){
+				Node n = nl.item(i);
+				if (n.getNodeType() == Node.ELEMENT_NODE){
+					Element e = (Element)n;
+					
+					Entry entry = new Entry();
+					entry.setAgency(e.getElementsByTagName("agency").item(0).getTextContent());
+					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
+					entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
+					entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
+					if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
+					results.add(entry);
+					
+				}
+				
+			}
+			Collections.shuffle(results);
+			randomList = results.subList(0, count);
+			
+			for (Entry en : randomList){
+				System.out.println(en.getAgency());
+				System.out.println(en.getHeadline());
+				System.out.println(en.getDate());
+				System.out.println(en.getCity());
+				System.out.println("========================================");
+			}
+
+		} catch(Exception e){
+			e.printStackTrace(System.err);
+		}
+		return randomList;
 	}
 	
 	private void initXMLdoc() {

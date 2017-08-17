@@ -8,9 +8,20 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">News Room</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="home.jsp">Home</a></li>
+      <li class="active"><a href="#">Search News</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
-  <h2>Online Book Store Search</h2>
+  <h2>News Search</h2>
   <form action="API" method="GET">
   	<input type="hidden" name="action" value="search">
     <div class="form-group">

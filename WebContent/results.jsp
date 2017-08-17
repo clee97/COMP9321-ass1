@@ -1,4 +1,4 @@
-<%@page import="models.Book"%>
+<%@page import="models.Entry"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -10,12 +10,5 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-List<Book> results = (List<Book>)request.getAttribute("searchResults");
-for (Book b : results){
-%>
-<a><%=b.getTitle()%></a><br>
-<a><%=b.getAuthors()%></a><br>
-<%} %>
 </body>
 </html>
