@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.util.ArrayList"%>
 <%@page import="models.Entry"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.XMLDao"%>
@@ -9,12 +10,19 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="WebContent/js/utils.js"></script>
 </head>
 <body>
 <%
 	XMLDao dao = new XMLDao();
-	Integer count = request.getParameter("count") != null ? Integer.parseInt(request.getParameter("count")) : 10;
-	List<Entry> randomEntries = dao.randomise(count);
+	List<Entry> randomEntries = new ArrayList<Entry>();
+	String count = request.getParameter("count") != null ? request.getParameter("count") : "10";
+	if (count.equals("ALL")){
+		randomEntries = dao.randomise(Integer.MAX_VALUE);
+	}else{
+		randomEntries = dao.randomise(Integer.parseInt(count));
+	}
+	
 %>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -32,6 +40,17 @@
 
     <hgroup class="mb20">
 		<h1>You may like</h1>
+ 	<form id="random-count" method=GET action="home.jsp">
+		<div class="form-group">
+			<label for="sel1">Select number of artifacts showing:</label>
+			<select class="form-control" name="count" id="sel1">
+				<option value="10">10</option>
+				<option value="100">100</option>
+				<option value="1000">1000</option>
+				<option value="ALL">ALL</option>
+			</select>
+		</div>
+	</form>
 		<h2 class="lead">Showing <strong class="text-danger"><%=count %></strong> Artifacts</h2>								
 	</hgroup>
 
