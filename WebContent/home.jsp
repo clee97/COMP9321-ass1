@@ -42,22 +42,15 @@
 	 	<form id="random-count" method=GET action="home.jsp">
 			<div class="form-group">
 				<label for="sel1">Select number of artifacts showing:</label>
-				<select class="form-control" name="count" id="sel1">
+				<select class="form-control" name="count" id="sel1" placeholder="<%=count%>">
 					<option value="10">10</option>
 					<option value="100">100</option>
 					<option value="1000">1000</option>
 					<option value="ALL">ALL</option>
 				</select>
 			</div>
+			<input type="submit" class="btn btn-primary" value="Show">
 		</form>
-		<script>
-			//refresh the page when the count changes
-			document.getElementById('sel1').onchange = function(){
-				document.getElementById('random-count').submit();
-				document.getElementById('sel1').value = document.getElementById('sel1').value;
-				
-			};
-		</script>
 		<h2 class="lead">Showing <strong class="text-danger"><%=count %></strong> Artifacts</h2>								
 	</hgroup>
 

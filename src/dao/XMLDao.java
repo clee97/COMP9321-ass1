@@ -116,6 +116,7 @@ public class XMLDao {
 				
 			}
 			Collections.shuffle(results);
+			if (count > results.size()) count = results.size();
 			randomList = results.subList(0, count);
 			
 			for (Entry en : randomList){
