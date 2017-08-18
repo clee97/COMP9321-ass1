@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="WebContent/js/utils.js"></script>
 </head>
 <body>
 <%
@@ -40,17 +39,25 @@
 
     <hgroup class="mb20">
 		<h1>You may like</h1>
- 	<form id="random-count" method=GET action="home.jsp">
-		<div class="form-group">
-			<label for="sel1">Select number of artifacts showing:</label>
-			<select class="form-control" name="count" id="sel1">
-				<option value="10">10</option>
-				<option value="100">100</option>
-				<option value="1000">1000</option>
-				<option value="ALL">ALL</option>
-			</select>
-		</div>
-	</form>
+	 	<form id="random-count" method=GET action="home.jsp">
+			<div class="form-group">
+				<label for="sel1">Select number of artifacts showing:</label>
+				<select class="form-control" name="count" id="sel1">
+					<option value="10">10</option>
+					<option value="100">100</option>
+					<option value="1000">1000</option>
+					<option value="ALL">ALL</option>
+				</select>
+			</div>
+		</form>
+		<script>
+			//refresh the page when the count changes
+			document.getElementById('sel1').onchange = function(){
+				document.getElementById('random-count').submit();
+				document.getElementById('sel1').value = document.getElementById('sel1').value;
+				
+			};
+		</script>
 		<h2 class="lead">Showing <strong class="text-danger"><%=count %></strong> Artifacts</h2>								
 	</hgroup>
 
