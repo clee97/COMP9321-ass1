@@ -53,9 +53,11 @@
 		</form>
 		<h2 class="lead">Showing <strong class="text-danger"><%=count %></strong> Artifacts</h2>								
 	</hgroup>
-
+	<form id="artifact-page" method="GET" action="API">
+	<input type="hidden" name="action" value="artifactPage">
     <section class="col-xs-12 col-sm-6 col-md-12">
 		<%for (Entry e : randomEntries){ %>
+		<input type="hidden" name="artifact-address" value="<%=e.getAddress()%>">
 		<article class="search-result row">
 			<div class="col-xs-12 col-sm-12 col-md-2">
 				<ul class="meta-search">
@@ -66,12 +68,12 @@
 			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
 				<h3><a href="#" title=""><%=e.getHeadline() %></a></h3>
 				<p><%=e.getContent() %></p>						
-                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
 			</div>
 			<span class="clearfix borda"></span>
 		</article>
 		<%} %>
 	</section>
+	</form>
 </div>
 </body>
 </html>

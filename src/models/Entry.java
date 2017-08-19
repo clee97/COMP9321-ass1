@@ -17,7 +17,17 @@ public class Entry implements java.io.Serializable{
 	
 	private String content;
 	
+	private String address;
+	
 	public Entry(){};
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public String getAgency() {
 		return agency;

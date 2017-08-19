@@ -76,6 +76,7 @@ public class XMLDao {
 					System.out.println("===============================");
 					
 					Entry entry = new Entry();
+					entry.setAddress(e.getAttribute("_address"));
 					entry.setAgency(e.getElementsByTagName("agency").item(0).getTextContent());
 					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
 					entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
@@ -92,6 +93,18 @@ public class XMLDao {
 
 	}
 	
+	public Entry searchByAddress(String address) {
+		Entry entry = null;
+		try{
+			XPath xPath =  XPathFactory.newInstance().newXPath();
+			NodeList nl = (NodeList) xPath.compile("/response/row/row[contains(@_address, '" + address + "']").evaluate(doc, XPathConstants.NODESET);
+			
+		}catch(Exception e){
+			e.printStackTrace(System.err);
+		}
+		return entry;
+	}
+	
 	public List<Entry> randomise(Integer count){
 		List<Entry> results = new ArrayList<Entry>();
 		List<Entry> randomList = new ArrayList<Entry>();
@@ -105,6 +118,7 @@ public class XMLDao {
 					Element e = (Element)n;
 					
 					Entry entry = new Entry();
+					entry.setAddress(e.getAttribute("_address"));
 					entry.setAgency(e.getElementsByTagName("agency").item(0).getTextContent());
 					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
 					entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());

@@ -40,6 +40,9 @@ public class MainApi extends HttpServlet {
 			request.setAttribute("searchResults", results);
 			request.getRequestDispatcher("results.jsp").forward(request, response);
 		}
+		else if (action.equals("artifactPage")){
+			
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
