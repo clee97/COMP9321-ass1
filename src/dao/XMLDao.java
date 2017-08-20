@@ -27,7 +27,8 @@ public class XMLDao {
 		//SearchRequest request = new SearchRequest("Department of Consumer and Business Services", null, null, null, null);
 		XMLDao dao = new XMLDao();
 		//dao.search(request);
-		dao.randomise(10);
+		//dao.randomise(10);
+		dao.searchByAddress("http://data.oregon.gov/resource/j8eb-8um2/723");
 	}
 	
 	public XMLDao() {
@@ -81,6 +82,7 @@ public class XMLDao {
 					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
 					entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
 					entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
+					entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
 					if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
 					results.add(entry);
 					
@@ -97,7 +99,25 @@ public class XMLDao {
 		Entry entry = null;
 		try{
 			XPath xPath =  XPathFactory.newInstance().newXPath();
-			NodeList nl = (NodeList) xPath.compile("/response/row/row[contains(@_address, '" + address + "']").evaluate(doc, XPathConstants.NODESET);
+			NodeList nl = (NodeList) xPath.compile("/response/row/row[contains(@_address, '" + address + "')]").evaluate(doc, XPathConstants.NODESET);
+			Element e = (Element)nl.item(0);
+			
+			System.out.println(e.getAttribute("_address"));
+			System.out.println(e.getElementsByTagName("agency").item(0).getTextContent()) ;
+			System.out.println(e.getElementsByTagName("headline").item(0).getTextContent()) ;
+			System.out.println(e.getElementsByTagName("publish_date").item(0).getTextContent()) ;
+			System.out.println(e.getElementsByTagName("city").item(0).getTextContent()) ;
+			System.out.println(e.getElementsByTagName("entered_by").item(0).getTextContent()) ;
+			System.out.println("===============================");
+			
+			entry = new Entry();
+			entry.setAddress(e.getAttribute("_address"));
+			entry.setAgency(e.getElementsByTagName("agency").item(0).getTextContent());
+			entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
+			entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
+			entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
+			entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
+			if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
 			
 		}catch(Exception e){
 			e.printStackTrace(System.err);
@@ -123,6 +143,10 @@ public class XMLDao {
 					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
 					entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
 					entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
+					if (e.getElementsByTagName("entered_by").getLength() > 0)
+						entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
+					else
+						entry.setEnteredBy("Anonymous");
 					if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
 					results.add(entry);
 					

@@ -41,7 +41,9 @@ public class MainApi extends HttpServlet {
 			request.getRequestDispatcher("results.jsp").forward(request, response);
 		}
 		else if (action.equals("artifactPage")){
-			
+			Entry artifact = dao.searchByAddress(request.getParameter("artifact-address"));
+			request.setAttribute("artifact", artifact);
+			request.getRequestDispatcher("artifact.jsp").forward(request, response);
 		}
 	}
 

@@ -19,7 +19,17 @@ public class Entry implements java.io.Serializable{
 	
 	private String address;
 	
+	private String enteredBy;
+	
 	public Entry(){};
+	
+	public String getEnteredBy() {
+		return enteredBy;
+	}
+
+	public void setEnteredBy(String enteredBy) {
+		this.enteredBy = enteredBy;
+	}
 	
 	public String getAddress() {
 		return address;

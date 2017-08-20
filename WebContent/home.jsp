@@ -54,25 +54,26 @@
 		<h2 class="lead">Showing <strong class="text-danger"><%=count %></strong> Artifacts</h2>								
 	</hgroup>
 	<form id="artifact-page" method="GET" action="API">
-	<input type="hidden" name="action" value="artifactPage">
-    <section class="col-xs-12 col-sm-6 col-md-12">
-		<%for (Entry e : randomEntries){ %>
-		<input type="hidden" name="artifact-address" value="<%=e.getAddress()%>">
-		<article class="search-result row">
-			<div class="col-xs-12 col-sm-12 col-md-2">
-				<ul class="meta-search">
-					<li><i class="glyphicon glyphicon-calendar"></i> <span><%=e.getDate().split("T")[0]%></span></li>
-					<li><i class="glyphicon glyphicon-home"></i> <span><%=e.getCity() %></span></li>
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-				<h3><a href="#" title=""><%=e.getHeadline() %></a></h3>
-				<p><%=e.getContent() %></p>						
-			</div>
-			<span class="clearfix borda"></span>
-		</article>
-		<%} %>
-	</section>
+		<input type="hidden" name="action" value="artifactPage">
+	    <section class="col-xs-12 col-sm-6 col-md-12">
+			<%for (Entry e : randomEntries){ %>
+			<input type="hidden" name="artifact-address" value="<%=e.getAddress()%>">
+			<article class="search-result row">
+				<div class="col-xs-12 col-sm-12 col-md-2">
+					<ul class="meta-search">
+						<li><i class="glyphicon glyphicon-calendar"></i> <span><%=e.getDate().split("T")[0]%></span></li>
+						<li><i class="glyphicon glyphicon-home"></i> <span><%=e.getCity() %></span></li>
+						<li><i class="glyphicon glyphicon-user"></i> <span><%=e.getEnteredBy() %></span></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+					<h3><a href="artifact.jsp?address=<%=e.getAddress()%>" title=""><%=e.getHeadline() %></a></h3>
+					<p><%=e.getContent() %></p>						
+				</div>
+				<span class="clearfix borda"></span>
+			</article>
+			<%} %>
+		</section>
 	</form>
 </div>
 </body>
