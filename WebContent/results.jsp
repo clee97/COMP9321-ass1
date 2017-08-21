@@ -14,7 +14,7 @@
 </head>
 <body>
 <% 
-	List<List<Entry>> pages = (List<List<Entry>>)request.getAttribute("searchResults");
+	List<List<Entry>> pages = (List<List<Entry>>)request.getSession().getAttribute("searchResults");
 	Integer lastPage = pages.size();
 	Integer pageNum = request.getParameter("pageNumber") != null ? Integer.parseInt(request.getParameter("pageNumber")) : 1;
 %>
@@ -24,7 +24,7 @@
       <a class="navbar-brand" href="#">News Room</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Home</a></li>
+      <li><a href="home.jsp">Home</a></li>
       <li><a href="search.jsp">Search News</a></li>
       <li><a href="#">Contact Us</a></li>
     </ul>
@@ -37,7 +37,7 @@
 </hgroup>
 <form id="artifact-page" method="GET" action="API">
     <section class="col-xs-12 col-sm-6 col-md-12">
-		<%for (Entry e : pages.get(pageNum-1)){ %>
+		<%for (Entry e : pages.get(pageNum)){ %>
 		<input type="hidden" name="artifact-address" value="<%=e.getAddress()%>">
 		<article class="search-result row">
 			<div class="col-xs-12 col-sm-12 col-md-2">
@@ -57,16 +57,15 @@
 	</section>
 </form>
 </div>
-<input type="hidden" name="pageNumber" value="<%=pageNum + 1%>">
-	<div class="container">            
-	  <ul class="pager">
-	  <%if (pageNum != 1) {%>
-	    <li class="previous"><a href="results.jsp?pageNumber=<%=pageNum - 1%>">Previous</a></li>
-	  <%} %>
-	  <%if (pageNum != lastPage) {%>
-	    <li class="next"><a href="results.jsp?pageNumber=<%=pageNum + 1%>">Next</a></li>
-	  <%}%>
-	  </ul>
-	</div>
+<div class="container">            
+  <ul class="pager">
+  <%if (pageNum != 1) {%>
+    <li class="previous"><a href="results.jsp?pageNumber=<%=pageNum - 1%>">Previous</a></li>
+  <%} %>
+  <%if (pageNum != lastPage) {%>
+    <li class="next"><a href="results.jsp?pageNumber=<%=pageNum + 1%>">Next</a></li>
+  <%}%>
+  </ul>
+</div>
 </body>
 </html>

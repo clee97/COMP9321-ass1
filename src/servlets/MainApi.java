@@ -30,9 +30,10 @@ public class MainApi extends HttpServlet {
 		if (action.equals("search")){
 			SearchRequest sr = new SearchRequest(request.getParameter("entry-agency"), request.getParameter("entry-headline"), request.getParameter("entry-date"), 
 					request.getParameter("entry-date"), request.getParameter("entry-content"));
-			
+			Integer pageNum = request.getParameter("pageNumber") != null ? Integer.parseInt(request.getParameter("pageNumber")) : 1;
 			List<List<Entry>> results = dao.search(sr);
-			request.setAttribute("searchResults", results);
+			request.getSession().setAttribute("searchResults", results);
+			request.setAttribute("lastPage", results.size());
 			request.getRequestDispatcher("results.jsp").forward(request, response);
 		}
 	}

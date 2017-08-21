@@ -29,10 +29,8 @@ public class XMLDao {
 	public static void main(String[] args) {
 		SearchRequest request = new SearchRequest("Department", null, null, null, null);
 		XMLDao dao = new XMLDao();
-		List<List<Entry>> pages = dao.search(request);
-		for (List<Entry> page : pages){
-			System.out.println(page.size());
-		}
+		//List<Entry> pages = dao.search(request, 1);
+
 		//dao.randomise(10);
 		//dao.searchByAddress("http://data.oregon.gov/resource/j8eb-8um2/723");
 	}
