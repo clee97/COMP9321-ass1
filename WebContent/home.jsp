@@ -35,9 +35,8 @@
     </ul>
   </div>
 </nav>
-<img src="pictures/banner.png" class="img-fluid" alt="Responsive image">
-<div class="container">
 
+<div class="container">
     <hgroup class="mb20">
 		<h1>You may like</h1>
 	 	<form id="random-count" method=GET action="home.jsp">
