@@ -16,7 +16,7 @@
     <ul class="nav navbar-nav">
       <li><a href="home.jsp">Home</a></li>
       <li class="active"><a href="#">Search News</a></li>
-      <li><a href="#">Contact Us</a></li>
+      <li><a href="contactus.jsp">Contact Us</a></li>
     </ul>
   </div>
 </nav>
@@ -40,6 +40,11 @@
       <label for="entry-city">City:</label>
       <input type="text" class="form-control" id="entry-city" placeholder="Enter City" name="entry-city">
     </div>
+    <div class="form-group">
+    <hgroup class="mb20">
+		<h2 class="lead"><strong class="text-danger">Advanced Search</strong> </h2>									
+	</hgroup>
+	</div>
     <div class="form-group">
       <label for="entry-content">Content:</label>
       <input type="text" class="form-control" id="book-title" placeholder="Enter Content" name="entry-content">

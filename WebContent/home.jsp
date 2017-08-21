@@ -31,10 +31,11 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="search.jsp">Search News</a></li>
-      <li><a href="#">Contact Us</a></li>
+      <li><a href="contactus.jsp">Contact Us</a></li>
     </ul>
   </div>
 </nav>
+<img src="pictures/banner.png" class="img-fluid" alt="Responsive image">
 <div class="container">
 
     <hgroup class="mb20">
@@ -66,7 +67,7 @@
 					</ul>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-					<h3><a href="artifact.jsp?address=<%=e.getAddress()%>" title=""><%=e.getHeadline() %></a></h3>
+					<h3><a href="API?address=<%=e.getAddress()%>&action=artifact" title=""><%=e.getHeadline() %></a></h3>
 					<p><%=e.getContent() %></p>						
 				</div>
 				<span class="clearfix borda"></span>

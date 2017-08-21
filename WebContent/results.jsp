@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="models.Entry"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -14,7 +15,9 @@
 </head>
 <body>
 <% 
+	//List<List<Entry>> pages = request.getSession().getAttribute("searchResults") != null ? (List<List<Entry>>)request.getSession().getAttribute("searchResults") : Collections.emptyList();
 	List<List<Entry>> pages = (List<List<Entry>>)request.getSession().getAttribute("searchResults");
+	String searchStrings = (String)request.getSession().getAttribute("searchStrings");
 	Integer lastPage = pages.size();
 	Integer pageNum = request.getParameter("pageNumber") != null ? Integer.parseInt(request.getParameter("pageNumber")) : 1;
 %>
@@ -26,19 +29,19 @@
     <ul class="nav navbar-nav">
       <li><a href="home.jsp">Home</a></li>
       <li><a href="search.jsp">Search News</a></li>
-      <li><a href="#">Contact Us</a></li>
+      <li><a href="contactus.jsp">Contact Us</a></li>
     </ul>
   </div>
 </nav>
 <div class="container">
+<%if (pages.size() != 0 && searchStrings != null){%>
 <hgroup class="mb20">
-	<h2 class="lead">Showing search results: </h2>
-	<h2 class="lead"><strong class="text-danger">Page: <%=pageNum %></strong> </h2>									
+	<h2 class="lead">Showing search results for: <%=searchStrings %></h2>
+	<h2 class="lead"><strong class="text-danger">Page: <%=pageNum %></strong> </h2>	
 </hgroup>
 <form id="artifact-page" method="GET" action="API">
     <section class="col-xs-12 col-sm-6 col-md-12">
-		<%for (Entry e : pages.get(pageNum)){ %>
-		<input type="hidden" name="artifact-address" value="<%=e.getAddress()%>">
+		<%for (Entry e : pages.get(pageNum - 1)){ %>
 		<article class="search-result row">
 			<div class="col-xs-12 col-sm-12 col-md-2">
 				<ul class="meta-search">
@@ -48,7 +51,7 @@
 				</ul>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-				<h3><a href="artifact.jsp?address=<%=e.getAddress()%>" title=""><%=e.getHeadline() %></a></h3>
+				<h3><a href="API?address=<%=e.getAddress()%>&action=artifact" title=""><%=e.getHeadline() %></a></h3>
 				<p><%=e.getContent() %></p>						
 			</div>
 			<span class="clearfix borda"></span>
@@ -66,6 +69,13 @@
     <li class="next"><a href="results.jsp?pageNumber=<%=pageNum + 1%>">Next</a></li>
   <%}%>
   </ul>
+</div>
+<%}else{ %>
+<div class="container">
+	<hgroup class="mb20">
+		<h2 class="lead"><strong class="text-danger">Sorry, no matching datasets found!</strong> </h2>									
+	</hgroup>
+<%} %>
 </div>
 </body>
 </html>

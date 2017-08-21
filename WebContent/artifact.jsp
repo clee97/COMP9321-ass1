@@ -14,9 +14,7 @@
 </head>
 <body>
 <%
-	String addr = request.getParameter("address");
-	XMLDao dao = new XMLDao();
-	Entry artifact = dao.searchByAddress(addr);
+	Entry artifact = (Entry)request.getAttribute("artifact");
 %>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -26,25 +24,11 @@
     <ul class="nav navbar-nav">
       <li><a href="home.jsp">Home</a></li>
       <li><a href="search.jsp">Search News</a></li>
-      <li><a href="#">Contact Us</a></li>
+      <li><a href="contactus.jsp">Contact Us</a></li>
     </ul>
   </div>
 </nav>
-<!-- <section class="col-xs-12 col-sm-6 col-md-12">
-	<article class="search-result row">
-		<div class="col-xs-12 col-sm-12 col-md-2">
-			<ul class="meta-search">
-				<li><i class="glyphicon glyphicon-calendar"></i> <span><%=artifact.getDate().split("T")[0]%></span></li>
-				<li><i class="glyphicon glyphicon-home"></i> <span><%=artifact.getCity() %></span></li>
-			</ul>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-			<h3><a href="#" title=""><%=artifact.getHeadline() %></a></h3>
-			<p><%=artifact.getContent() %></p>						
-		</div>
-		<span class="clearfix borda"></span>
-	</article>
-</section>-->
+<%if (artifact != null) {%>
 <article>
     
     <header>
@@ -102,5 +86,12 @@
     </section>
     
 </article>
+<%}else{ %>
+<div class="container">
+	<hgroup class="mb20">
+		<h2 class="lead"><strong class="text-danger">No artifact specified</strong> </h2>									
+	</hgroup>
+</div>
+<%} %>
 </body>
 </html>
