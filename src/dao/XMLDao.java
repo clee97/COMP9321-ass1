@@ -2,8 +2,11 @@ package dao;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,18 +27,21 @@ public class XMLDao {
 	private static Document doc;
 	
 	public static void main(String[] args) {
-		//SearchRequest request = new SearchRequest("Department of Consumer and Business Services", null, null, null, null);
+		SearchRequest request = new SearchRequest("Department", null, null, null, null);
 		XMLDao dao = new XMLDao();
-		//dao.search(request);
+		List<List<Entry>> pages = dao.search(request);
+		for (List<Entry> page : pages){
+			System.out.println(page.size());
+		}
 		//dao.randomise(10);
-		dao.searchByAddress("http://data.oregon.gov/resource/j8eb-8um2/723");
+		//dao.searchByAddress("http://data.oregon.gov/resource/j8eb-8um2/723");
 	}
 	
 	public XMLDao() {
 		initXMLdoc();
 	}
 	
-	public List<Entry> search(SearchRequest request) {
+	public List<List<Entry>> search(SearchRequest request) {
 		String expression = "";
 		List<String> filters = new ArrayList<String>();
 		if (request.getAgency() != null && !request.getAgency().isEmpty()){
@@ -91,8 +97,26 @@ public class XMLDao {
 		} catch(Exception e){
 			e.printStackTrace(System.err);
 		}
-		return results;
+		return paginate(results, 10);
 
+	}
+	
+	private List<List<Entry>> paginate(List<Entry> list, Integer pageSize) {
+	    if (list == null){
+	        return Collections.emptyList();
+	    }
+	   
+	    if (pageSize == null || pageSize <= 0 || pageSize > list.size()){
+	        pageSize = list.size();
+	    }
+	    int numPages = (int) Math.ceil((double)list.size() / (double)pageSize);
+	    
+	    List<List<Entry>> pages = new ArrayList<List<Entry>>(numPages);
+	    
+	    for (int pageNum = 0; pageNum < numPages;){
+	        pages.add(list.subList(pageNum * pageSize, Math.min(++pageNum * pageSize, list.size())));
+	    }
+	    return pages;
 	}
 	
 	public Entry searchByAddress(String address) {

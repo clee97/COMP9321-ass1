@@ -27,23 +27,13 @@ public class MainApi extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		XMLDao dao = new XMLDao();
-		if (action.equals("home")){
-			Integer count = request.getParameter("count") != null ? Integer.parseInt(request.getParameter("count")) : 10;
-			List<Entry> randomEntries = dao.randomise(count);
-			request.setAttribute("randomEntries", randomEntries);
-		}
-		else if (action.equals("search")){
+		if (action.equals("search")){
 			SearchRequest sr = new SearchRequest(request.getParameter("entry-agency"), request.getParameter("entry-headline"), request.getParameter("entry-date"), 
 					request.getParameter("entry-date"), request.getParameter("entry-content"));
 			
-			List<Entry> results = dao.search(sr);
+			List<List<Entry>> results = dao.search(sr);
 			request.setAttribute("searchResults", results);
 			request.getRequestDispatcher("results.jsp").forward(request, response);
-		}
-		else if (action.equals("artifactPage")){
-			Entry artifact = dao.searchByAddress(request.getParameter("artifact-address"));
-			request.setAttribute("artifact", artifact);
-			request.getRequestDispatcher("artifact.jsp").forward(request, response);
 		}
 	}
 

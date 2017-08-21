@@ -54,7 +54,6 @@
 		<h2 class="lead">Showing <strong class="text-danger"><%=count %></strong> Artifacts</h2>								
 	</hgroup>
 	<form id="artifact-page" method="GET" action="API">
-		<input type="hidden" name="action" value="artifactPage">
 	    <section class="col-xs-12 col-sm-6 col-md-12">
 			<%for (Entry e : randomEntries){ %>
 			<input type="hidden" name="artifact-address" value="<%=e.getAddress()%>">
