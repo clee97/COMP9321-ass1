@@ -16,7 +16,7 @@
 <%
 	Entry artifact = (Entry)request.getAttribute("artifact");
 %>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">News Room</a>
@@ -28,70 +28,55 @@
     </ul>
   </div>
 </nav>
-<%if (artifact != null) {%>
-<article>
-    
-    <header>
-        
-        <h1><%=artifact.getHeadline() %></h1>
-        
-    </header>
-    
-    <div class="background-bar">
-        
-    </div>
-    
-    <section class="container-fluid main-body">
-        <section class="row">
-            
-            <div class="hidden-xs col-sm-1 col-md-2">
-                
+<section class="banner-section">
+</section>
+<section class="post-content-section">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
+               
+                <h1 class="text-center"><%=artifact.getHeadline() %></h1>
+                <ul class="list-inline text-center">
+                    <li><%=artifact.getEnteredBy() %> |</li>
+                    <li><%=artifact.getAgency() %> |</li>
+                    <li><%=artifact.getDate().split("T")[0] %> |</li>
+                </ul>
             </div>
-            
-            <div class="col-xs-12 col-sm-10 col-md-8">
-            
-                <div class="content-holder">
-                    
-                    <div class="content-description">
-                        <div class="author-avatar">
-                            <img src="http://lorempixel.com/90/90/people" class="img-circle" />
-                        </div>
-                        <div class="author-name">
-                            <h3><%=artifact.getEnteredBy() %></h3>
-                        </div>
-                        <div class="row blog-info">
-                            <div class="col-xs-12 col-sm-6">
-                                <span class="lead text-muted"><i class="fa fa-clock-o"></i> Published: <%=artifact.getDate().split("T")[0] %></span>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <span class="lead text-muted"><i class="fa fa-tags"></i>City: <%=artifact.getCity() %></span>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
-                    <div class="content-body">
-                       <p><pre><%=artifact.getContent() %></pre></p>
-                    </div>
-                    
+            <div class="col-lg-9 col-md-9 col-sm-12">
+            	<p class="lead">Artifact Content: </p>
+                <p><%=artifact.getContent() %></p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="well">
+                    <h2>Subscription Box</h2>
+                    <p>Form Description Goes here</p>
+                    <div class="input-group">
+			      <input type="text" class="form-control" placeholder="Search for...">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">Go!</button>
+			      </span>
+			 	</div>
                 </div>
-            
+                <div class="list-group">
+                	<input type="submit" class="btn btn-primary" value="Extract Keyword">
+                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Keywords</h4> <p class="list-group-item-text">Press "Extract Keywords" to have this page highlight all its keywords</p> </a>
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="Extract People">	
+                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract People</h4> <p class="list-group-item-text">Press "Extract People" to have this page highlight people</p> </a>
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="Extract Organisations">	
+                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Organisations</h4> <p class="list-group-item-text">Press "Extract Organisations" to have this page highlight all organisations</p> </a> 
+                	<br>
+                	<input type="submit" class="btn btn-primary" value="Extract Locations">	
+               		<a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Locations</h4> <p class="list-group-item-text">Press "Extract Locations" to have this page highlight all locations</p> </a> 
+                </div>
             </div>
-            
-            <div class="hidden-xs col-sm-1 col-md-2">
-                
-            </div>
-            
-        </section>
-    </section>
-    
-</article>
-<%}else{ %>
-<div class="container">
-	<hgroup class="mb20">
-		<h2 class="lead"><strong class="text-danger">No artifact specified</strong> </h2>									
-	</hgroup>
-</div>
-<%} %>
+        </div>
+      
+
+    </div> <!-- /container -->
+</section>
+
 </body>
 </html>
