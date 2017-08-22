@@ -15,7 +15,6 @@
 </head>
 <body>
 <% 
-	//List<List<Entry>> pages = request.getSession().getAttribute("searchResults") != null ? (List<List<Entry>>)request.getSession().getAttribute("searchResults") : Collections.emptyList();
 	List<List<Entry>> pages = (List<List<Entry>>)request.getSession().getAttribute("searchResults");
 	String searchStrings = (String)request.getSession().getAttribute("searchStrings");
 	Integer lastPage = pages.size();

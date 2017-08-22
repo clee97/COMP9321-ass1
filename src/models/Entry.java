@@ -1,12 +1,9 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Entry implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private String agency;
 	
 	private String headline;

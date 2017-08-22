@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.XMLDao;
+import extractor.Extractor;
 import models.Entry;
 import models.SearchRequest;
+import unsw.curation.api.domain.ExtractionKeyword;
+import unsw.curation.api.extractnamedentity.ExtractEntityFile;
+import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
 
 /**
  * Main Servlet which controls what the system does
@@ -38,19 +43,19 @@ public class MainApi extends HttpServlet {
 			String expression = "";
 			List<String> filters = new ArrayList<String>();
 			if (request.getParameter("entry-agency") != null && !request.getParameter("entry-agency").isEmpty()){
-				filters.add("agency: "+ request.getParameter("entry-agency"));
+				filters.add("agency - "+ request.getParameter("entry-agency"));
 			}
 			if (request.getParameter("entry-headline") != null && !request.getParameter("entry-headline").isEmpty()){
-				filters.add("headline: "+ request.getParameter("entry-headline"));
+				filters.add("headline - "+ request.getParameter("entry-headline"));
 			}
 			if (request.getParameter("entry-date") != null && !request.getParameter("entry-date").isEmpty()){
-				filters.add("date: "+ request.getParameter("entry-date"));
+				filters.add("date - "+ request.getParameter("entry-date"));
 			}
 			if (request.getParameter("entry-city") != null && !request.getParameter("entry-city").isEmpty()){
-				filters.add("city: "+ request.getParameter("entry-city"));
+				filters.add("city - "+ request.getParameter("entry-city"));
 			}
 			if (request.getParameter("entry-content") != null && !request.getParameter("entry-content").isEmpty() ){
-				filters.add("content: "+ request.getParameter("entry-content"));
+				filters.add("content - "+ request.getParameter("entry-content"));
 			}
 			
 			if (!filters.isEmpty()){
@@ -67,6 +72,42 @@ public class MainApi extends HttpServlet {
 			Entry artifact = dao.searchByAddress(address);
 			request.setAttribute("artifact", artifact);
 			request.getRequestDispatcher("artifact.jsp").forward(request, response);
+		}
+		else if (action.equals("Extract People")){
+			String address = request.getParameter("address");
+			Entry artifact = dao.searchByAddress(address);
+			try {
+				Extractor.extractPerson(artifact);
+				request.setAttribute("artifact", artifact);
+				request.getRequestDispatcher("artifact.jsp").forward(request, response);
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		else if (action.equals("Extract Organisations")){
+			String address = request.getParameter("address");
+			Entry artifact = dao.searchByAddress(address);
+			try {
+				Extractor.extractOrganisation(artifact);
+				request.setAttribute("artifact", artifact);
+				request.getRequestDispatcher("artifact.jsp").forward(request, response);
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		else if (action.equals("Extract Locations")){
+			String address = request.getParameter("address");
+			Entry artifact = dao.searchByAddress(address);
+			try {
+				Extractor.extractLocation(artifact);
+				request.setAttribute("artifact", artifact);
+				request.getRequestDispatcher("artifact.jsp").forward(request, response);
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+			
 		}
 	}
 

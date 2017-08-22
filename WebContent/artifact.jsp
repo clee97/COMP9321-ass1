@@ -58,19 +58,22 @@
 			      </span>
 			 	</div>
                 </div>
-                <div class="list-group">
-                	<input type="submit" class="btn btn-primary" value="Extract Keyword">
-                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Keywords</h4> <p class="list-group-item-text">Press "Extract Keywords" to have this page highlight all its keywords</p> </a>
-                    <br>
-                    <input type="submit" class="btn btn-primary" value="Extract People">	
-                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract People</h4> <p class="list-group-item-text">Press "Extract People" to have this page highlight people</p> </a>
-                    <br>
-                    <input type="submit" class="btn btn-primary" value="Extract Organisations">	
-                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Organisations</h4> <p class="list-group-item-text">Press "Extract Organisations" to have this page highlight all organisations</p> </a> 
-                	<br>
-                	<input type="submit" class="btn btn-primary" value="Extract Locations">	
-               		<a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Locations</h4> <p class="list-group-item-text">Press "Extract Locations" to have this page highlight all locations</p> </a> 
-                </div>
+                <form id="extract" method="GET" action="API">
+                <input type="hidden" name="address" value="<%=artifact.getAddress()%>">
+	                <div class="list-group">
+	                	<input type="submit" class="btn btn-primary" name="action" value="Extract Keyword">
+	                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Keywords</h4> <p class="list-group-item-text">Press "Extract Keywords" to have this page highlight all its keywords</p> </a>
+	                    <br>
+	                    <input type="submit" class="btn btn-primary" name="action" value="Extract People">	
+	                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract People</h4> <p class="list-group-item-text">Press "Extract People" to have this page highlight people</p> </a>
+	                    <br>
+	                    <input type="submit" class="btn btn-primary" name="action" value="Extract Organisations">	
+	                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Organisations</h4> <p class="list-group-item-text">Press "Extract Organisations" to have this page highlight all organisations</p> </a> 
+	                	<br>
+	                	<input type="submit" class="btn btn-primary" name="action" value="Extract Locations">	
+	               		<a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Locations</h4> <p class="list-group-item-text">Press "Extract Locations" to have this page highlight all locations</p> </a> 
+	                </div>
+                </form>
             </div>
         </div>
       
