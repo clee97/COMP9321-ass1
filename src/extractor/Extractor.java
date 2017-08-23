@@ -48,7 +48,6 @@ public class Extractor {
 		String keywords = keywordExtractor.ExtractSentenceKeyword(entry.getContent(), new File("keywords/englishStopwords.txt"));
 		String[] keywordsArray = keywords.split(",");
 		for (String k : keywordsArray){
-			System.out.println(k);
 			entry.setContent(entry.getContent().replace(k.trim(), "<strong class=\"text-danger\">" + k.trim() + "</strong>"));
 		}
 

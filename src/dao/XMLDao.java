@@ -78,7 +78,9 @@ public class XMLDao {
 						entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
 					else
 						entry.setEnteredBy("Anonymous");
-					if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
+					
+					if (e.getElementsByTagName("content").getLength() > 0)
+						entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/3) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
 					results.add(entry);
 					
 				}
@@ -133,7 +135,8 @@ public class XMLDao {
 				entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
 			else
 				entry.setEnteredBy("Anonymous");
-			if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
+			if (e.getElementsByTagName("content").getLength() > 0)
+				entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
 			
 		}catch(Exception e){
 			e.printStackTrace(System.err);
@@ -163,7 +166,8 @@ public class XMLDao {
 						entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
 					else
 						entry.setEnteredBy("Anonymous");
-					if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
+					if (e.getElementsByTagName("content").getLength() > 0)
+						entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/3) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
 					results.add(entry);
 					
 				}
