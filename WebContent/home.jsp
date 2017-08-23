@@ -32,6 +32,7 @@
       <li class="active"><a href="#">Home</a></li>
       <li><a href="search.jsp">Search News</a></li>
       <li><a href="contactus.jsp">Contact Us</a></li>
+      <li><a href="sitemap.jsp">Site Map</a></li>
     </ul>
   </div>
 </nav>

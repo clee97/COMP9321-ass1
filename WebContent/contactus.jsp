@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<%@page import="dao.XMLDao"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="models.Entry"%>
-<%@page import="java.util.List"%>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -22,6 +18,7 @@
       <li><a href="home.jsp">Home</a></li>
       <li><a href="search.jsp">Search News</a></li>
       <li class="active"><a href="contactus.jsp">Contact Us</a></li>
+      <li><a href="sitemap.jsp">Site Map</a></li>
     </ul>
   </div>
 </nav>
@@ -48,5 +45,6 @@
             
         <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">Submit</button>
         </form>
+	</div>
 </div>
-</div>
+</body>
