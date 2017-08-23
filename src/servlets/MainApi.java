@@ -40,6 +40,9 @@ public class MainApi extends HttpServlet {
 			List<List<Entry>> results = dao.search(sr);
 			request.getSession().setAttribute("searchResults", results);
 			
+			/*
+			 * build the query string for xml file
+			 */
 			String expression = "";
 			List<String> filters = new ArrayList<String>();
 			if (request.getParameter("entry-agency") != null && !request.getParameter("entry-agency").isEmpty()){
@@ -77,7 +80,7 @@ public class MainApi extends HttpServlet {
 			String address = request.getParameter("address");
 			Entry artifact = dao.searchByAddress(address);
 			try {
-				Extractor.extractPerson(artifact);
+				Extractor.extractPerson(artifact); //highlight the all the names of people in the content
 				request.setAttribute("artifact", artifact);
 				request.getRequestDispatcher("artifact.jsp").forward(request, response);
 			} catch (URISyntaxException e) {
@@ -89,7 +92,7 @@ public class MainApi extends HttpServlet {
 			String address = request.getParameter("address");
 			Entry artifact = dao.searchByAddress(address);
 			try {
-				Extractor.extractOrganisation(artifact);
+				Extractor.extractOrganisation(artifact); //highlight all the organisations in the content
 				request.setAttribute("artifact", artifact);
 				request.getRequestDispatcher("artifact.jsp").forward(request, response);
 			} catch (URISyntaxException e) {
@@ -102,9 +105,21 @@ public class MainApi extends HttpServlet {
 			Entry artifact = dao.searchByAddress(address);
 			try {
 				Extractor.extractLocation(artifact);
-				request.setAttribute("artifact", artifact);
+				request.setAttribute("artifact", artifact); //highlight all the locations in the content
 				request.getRequestDispatcher("artifact.jsp").forward(request, response);
 			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		else if (action.equals("Extract Keywords")){
+			String address = request.getParameter("address");
+			Entry artifact = dao.searchByAddress(address);
+			try {
+				Extractor.extractKeyword(artifact);
+				request.setAttribute("artifact", artifact); //highlight all the locations in the content
+				request.getRequestDispatcher("artifact.jsp").forward(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			

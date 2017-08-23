@@ -45,7 +45,7 @@
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12">
             	<p class="lead">Artifact Content: </p>
-                <p><%=artifact.getContent() %></p>
+                <p><pre><%=artifact.getContent() %></pre></p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <div class="well">
@@ -61,7 +61,7 @@
                 <form id="extract" method="GET" action="API">
                 <input type="hidden" name="address" value="<%=artifact.getAddress()%>">
 	                <div class="list-group">
-	                	<input type="submit" class="btn btn-primary" name="action" value="Extract Keyword">
+	                	<input type="submit" class="btn btn-primary" name="action" value="Extract Keywords">
 	                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Extract Keywords</h4> <p class="list-group-item-text">Press "Extract Keywords" to have this page highlight all its keywords</p> </a>
 	                    <br>
 	                    <input type="submit" class="btn btn-primary" name="action" value="Extract People">	
