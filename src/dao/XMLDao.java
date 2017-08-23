@@ -80,7 +80,7 @@ public class XMLDao {
 						entry.setEnteredBy("Anonymous");
 					
 					if (e.getElementsByTagName("content").getLength() > 0)
-						entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/3) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
+						entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
 					results.add(entry);
 					
 				}
@@ -167,7 +167,7 @@ public class XMLDao {
 					else
 						entry.setEnteredBy("Anonymous");
 					if (e.getElementsByTagName("content").getLength() > 0)
-						entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/3) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
+						entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
 					results.add(entry);
 					
 				}
