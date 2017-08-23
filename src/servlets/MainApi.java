@@ -15,9 +15,6 @@ import dao.XMLDao;
 import extractor.Extractor;
 import models.Entry;
 import models.SearchRequest;
-import unsw.curation.api.domain.ExtractionKeyword;
-import unsw.curation.api.extractnamedentity.ExtractEntityFile;
-import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
 
 /**
  * Main Servlet which controls what the system does

@@ -2,11 +2,8 @@ package dao;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,15 +22,6 @@ import models.SearchRequest;
 public class XMLDao {
 	
 	private static Document doc;
-	
-	public static void main(String[] args) {
-		SearchRequest request = new SearchRequest("Department", null, null, null, null);
-		XMLDao dao = new XMLDao();
-		//List<Entry> pages = dao.search(request, 1);
-
-		//dao.randomise(10);
-		//dao.searchByAddress("http://data.oregon.gov/resource/j8eb-8um2/723");
-	}
 	
 	public XMLDao() {
 		initXMLdoc();
@@ -86,7 +74,10 @@ public class XMLDao {
 					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
 					entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
 					entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
-					entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
+					if (e.getElementsByTagName("entered_by").getLength() > 0)
+						entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
+					else
+						entry.setEnteredBy("Anonymous");
 					if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
 					results.add(entry);
 					
@@ -138,7 +129,10 @@ public class XMLDao {
 			entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
 			entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
 			entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
-			entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
+			if (e.getElementsByTagName("entered_by").getLength() > 0)
+				entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
+			else
+				entry.setEnteredBy("Anonymous");
 			if (e.getElementsByTagName("content").getLength() > 0)entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
 			
 		}catch(Exception e){

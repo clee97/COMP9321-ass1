@@ -51,7 +51,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
 				<h3><a href="API?address=<%=e.getAddress()%>&action=artifact" title=""><%=e.getHeadline() %></a></h3>
-				<p><%=e.getContent() %></p>						
+				<p><pre style="white-space: pre-wrap"><%=e.getContent() %></pre></p>						
 			</div>
 			<span class="clearfix borda"></span>
 		</article>

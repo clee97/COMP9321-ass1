@@ -45,7 +45,7 @@
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12">
             	<p class="lead">Artifact Content: </p>
-                <p><pre><%=artifact.getContent() %></pre></p>
+                <pre><%=artifact.getContent() %></pre>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <div class="well">
