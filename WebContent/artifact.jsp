@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
                
-                <h1 class="text-center"><%=artifact.getHeadline().replace("”", "&#34;") %></h1>
+                <h1 class="text-center"><%=artifact.getHeadline()%></h1>
                 <ul class="list-inline text-center">
                     <li><%=artifact.getEnteredBy() %> |</li>
                     <li><%=artifact.getAgency() %> |</li>

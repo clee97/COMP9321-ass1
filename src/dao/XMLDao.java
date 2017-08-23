@@ -192,7 +192,7 @@ public class XMLDao {
 	}
 	
 	private void initXMLdoc() {
-		File inputFile = new File("dataset/rows.xml");
+		File inputFile = new File("WebContent/dataset/rows.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		try {
 			dbFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
