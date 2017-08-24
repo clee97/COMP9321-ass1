@@ -41,18 +41,37 @@
       <label for="entry-city">City:</label>
       <input type="text" class="form-control" id="entry-city" placeholder="Enter City" name="entry-city">
     </div>
-    <div class="form-group">
-    <hgroup class="mb20">
-		<h2 class="lead"><strong class="text-danger">Advanced Search</strong> </h2>									
-	</hgroup>
-	</div>
-    <div class="form-group">
+	<div class="form-group">
       <label for="entry-content">Content:</label>
-      <input type="text" class="form-control" id="book-title" placeholder="Enter Content" name="entry-content">
+      <input type="text" class="form-control" id="entry-title" placeholder="Enter Content" name="entry-content">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  <hgroup class="mb20">
+	<h2 class="lead"><strong class="text-danger">Advanced Search</strong> </h2>	
+	<p>Enter a keyword, name of a person, organisation or location of your choice</p>		
+	<br>						
+  </hgroup>
+  <form action="API" method="GET">
+  	<input type="hidden" name="action" value="advanced">
+    <div class="form-group">
+      <label for="entry-keyword">Keyword:</label>
+      <input type="text" class="form-control" id="entry-keyword" placeholder="Enter Keyword" name="entry-keyword">
+    </div>
+    <div class="form-group">
+      <label for="entry-people">People:</label>
+      <input type="text" class="form-control" id="entry-people" placeholder="Enter Person" name="entry-people">
+    </div>
+    <div class="form-group">
+      <label for="entry-content">Organisation:</label>
+      <input type="text" class="form-control" id="entry-organisation" placeholder="Enter Organisation" name="entry-organisation">
+    </div>
+    <div class="form-group">
+      <label for="entry-location">Location:</label>
+      <input type="text" class="form-control" id="entry-location" placeholder="Enter Location" name="entry-location">
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
   </form>
 </div>
-
 </body>
 </html>

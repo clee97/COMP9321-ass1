@@ -77,7 +77,7 @@ public class MainApi extends HttpServlet {
 			String address = request.getParameter("address");
 			Entry artifact = dao.searchByAddress(address);
 			try {
-				Extractor.extractPerson(artifact); //highlight the all the names of people in the content
+				Extractor.highlightPeople(artifact); //highlight the all the names of people in the content
 				request.setAttribute("artifact", artifact);
 				request.getRequestDispatcher("artifact.jsp").forward(request, response);
 			} catch (URISyntaxException e) {
@@ -89,7 +89,7 @@ public class MainApi extends HttpServlet {
 			String address = request.getParameter("address");
 			Entry artifact = dao.searchByAddress(address);
 			try {
-				Extractor.extractOrganisation(artifact); //highlight all the organisations in the content
+				Extractor.highlightOrganisations(artifact); //highlight all the organisations in the content
 				request.setAttribute("artifact", artifact);
 				request.getRequestDispatcher("artifact.jsp").forward(request, response);
 			} catch (URISyntaxException e) {
@@ -101,7 +101,7 @@ public class MainApi extends HttpServlet {
 			String address = request.getParameter("address");
 			Entry artifact = dao.searchByAddress(address);
 			try {
-				Extractor.extractLocation(artifact);
+				Extractor.highlightLocations(artifact);
 				request.setAttribute("artifact", artifact); //highlight all the locations in the content
 				request.getRequestDispatcher("artifact.jsp").forward(request, response);
 			} catch (URISyntaxException e) {
@@ -113,7 +113,7 @@ public class MainApi extends HttpServlet {
 			String address = request.getParameter("address");
 			Entry artifact = dao.searchByAddress(address);
 			try {
-				Extractor.extractKeyword(artifact);
+				Extractor.highlightKeywords(artifact);
 				request.setAttribute("artifact", artifact); //highlight all the locations in the content
 				request.getRequestDispatcher("artifact.jsp").forward(request, response);
 			} catch (Exception e) {

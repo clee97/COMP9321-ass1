@@ -7,6 +7,10 @@ import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -16,6 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import extractor.Extractor;
 import models.Entry;
 import models.SearchRequest;
 
@@ -25,6 +30,11 @@ public class XMLDao {
 	
 	public XMLDao() {
 		initXMLdoc();
+	}
+	
+	public static void main(String[] args) {
+		XMLDao dao = new XMLDao();
+		dao.insertExtractedEntities();
 	}
 	
 	public List<List<Entry>> search(SearchRequest request) {
@@ -189,6 +199,44 @@ public class XMLDao {
 			e.printStackTrace(System.err);
 		}
 		return randomList;
+	}
+	
+	public static void insertExtractedEntities() {
+		try{
+			XPath xPath =  XPathFactory.newInstance().newXPath();
+			NodeList nl = (NodeList) xPath.compile("/response/row/row").evaluate(doc, XPathConstants.NODESET);
+			
+			for (int i = 0; i < nl.getLength(); i++){
+				Node n = nl.item(i);
+				if (n.getNodeType() == Node.ELEMENT_NODE){
+					Element e = (Element)n;
+					/*debug stuff*/
+					System.out.println(e.getAttribute("_address"));
+					System.out.println(e.getElementsByTagName("agency").item(0).getTextContent()) ;
+					System.out.println(e.getElementsByTagName("headline").item(0).getTextContent()) ;
+					System.out.println(e.getElementsByTagName("publish_date").item(0).getTextContent()) ;
+					System.out.println(e.getElementsByTagName("city").item(0).getTextContent()) ;
+					System.out.println("===============================");
+					
+					Entry entry = new Entry();
+					entry.setAddress(e.getAttribute("_address"));
+					entry.setAgency(e.getElementsByTagName("agency").item(0).getTextContent());
+					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
+					entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
+					entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
+					if (e.getElementsByTagName("entered_by").getLength() > 0)
+						entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
+					else
+						entry.setEnteredBy("Anonymous");
+					
+					if (e.getElementsByTagName("content").getLength() > 0)
+						entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
+					
+				}
+			}
+		} catch(Exception e){
+			e.printStackTrace(System.err);
+		}
 	}
 	
 	private void initXMLdoc() {
