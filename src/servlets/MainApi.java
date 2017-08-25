@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.XMLDao;
 import extractor.Extractor;
+import models.AdvancedSearchRequest;
 import models.Entry;
 import models.SearchRequest;
 
@@ -66,6 +67,11 @@ public class MainApi extends HttpServlet {
 			request.getSession().setAttribute("searchStrings", expression);
 			
 			request.getRequestDispatcher("results.jsp").forward(request, response);
+		}
+		else if (action.equals("advanced")){
+			AdvancedSearchRequest asr = new AdvancedSearchRequest(request.getParameter("entry-keyword"), request.getParameter("entry-person"), 
+					request.getParameter("entry-organisation"), request.getParameter("entry-location"));
+		
 		}
 		else if (action.equals("artifact")){
 			String address = request.getParameter("address");
