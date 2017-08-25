@@ -89,7 +89,7 @@ public class XMLDao {
 		List<Entry> results = new ArrayList<Entry>();
 		try{
 			XPath xPath =  XPathFactory.newInstance().newXPath();
-			NodeList nl = (NodeList) xPath.compile("/response/row/row").evaluate(doc, XPathConstants.NODESET);
+			NodeList nl = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
 			
 			for (int i = 0; i < nl.getLength(); i++){
 				Node n = nl.item(i);
