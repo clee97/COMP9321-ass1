@@ -16,6 +16,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import edu.stanford.nlp.ling.CoreAnnotations.FirstChildAnnotation;
+import extractor.Extractor;
 import models.AdvancedSearchRequest;
 import models.Entry;
 import models.SearchRequest;
@@ -116,13 +118,49 @@ public class XMLDao {
 					
 					if (e.getElementsByTagName("content").getLength() > 0)
 						entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
-					results.add(entry);
+					
+					boolean isPartOfKeywords = isSubstringOf(Extractor.extractKeywords(entry), request.getKeyword());
+					boolean isPartOfPeople = isSubstringOf(Extractor.extractPeople(entry), request.getPerson());
+					boolean isPartOfOrganisations = isSubstringOf(Extractor.extractOrganisations(entry), request.getOrganisation());
+					boolean isPartOfLocations = isSubstringOf(Extractor.extractLocations(entry), request.getLocation());
+					
+					if (isPartOfKeywords && isPartOfPeople && isPartOfLocations && isPartOfOrganisations) {
+						results.add(entry);
+					}
+					
 				}
 			}
 		} catch(Exception e){
 			e.printStackTrace(System.err);
 		}
 		return paginate(results, 10);
+	}
+	/**
+	 * @param list (list to be checked)
+	 * @param searchString (search string that will be checked inside the list)
+	 * @return returns whether or not the searchString is contained in any element of the list
+	 */
+	private boolean isSubstringOf(List<String> list, String searchString) {
+		for (String s : list) {
+			if (s.contains(searchString)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * @param list (list to be checked)
+	 * @param searchString (search string that will be checked inside the list)
+	 * @return returns whether or not the searchString is contained in any element of the list
+	 */
+	private boolean isSubstringOf(String[] list, String searchString) {
+		for (String s : list) {
+			if (s.contains(searchString)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**

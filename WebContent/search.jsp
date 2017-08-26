@@ -63,7 +63,7 @@
       <input type="text" class="form-control" id="entry-people" placeholder="Enter Person" name="entry-people">
     </div>
     <div class="form-group">
-      <label for="entry-content">Organisation:</label>
+      <label for="entry-organisation">Organisation:</label>
       <input type="text" class="form-control" id="entry-organisation" placeholder="Enter Organisation" name="entry-organisation">
     </div>
     <div class="form-group">
