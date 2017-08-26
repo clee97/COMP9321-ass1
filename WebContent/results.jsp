@@ -42,6 +42,9 @@
 <form id="artifact-page" method="GET" action="API">
     <section class="col-xs-12 col-sm-6 col-md-12">
 		<%for (Entry e : pages.get(pageNum - 1)){ %>
+		<div style="inline-block">
+    		<hr class="between" />
+		</div>
 		<article class="search-result row">
 			<div class="col-xs-12 col-sm-12 col-md-2">
 				<ul class="meta-search">

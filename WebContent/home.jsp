@@ -58,6 +58,9 @@
 	    <section class="col-xs-12 col-sm-6 col-md-12">
 			<%for (Entry e : randomEntries){ %>
 			<input type="hidden" name="artifact-address" value="<%=e.getAddress()%>">
+			<div style="inline-block">
+    			<hr class="between" />
+			</div>
 			<article class="search-result row">
 				<div class="col-xs-12 col-sm-12 col-md-2">
 					<ul class="meta-search">
