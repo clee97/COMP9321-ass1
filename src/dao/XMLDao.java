@@ -32,6 +32,7 @@ public class XMLDao {
 	
 	public static void main(String[] args) {
 		XMLDao dao = new XMLDao();
+		System.out.println("Randy Weist".contains("Randy Weist"));
 	}
 	
 	/**
@@ -111,18 +112,23 @@ public class XMLDao {
 					entry.setHeadline(e.getElementsByTagName("headline").item(0).getTextContent());
 					entry.setDate(e.getElementsByTagName("publish_date").item(0).getTextContent());
 					entry.setCity(e.getElementsByTagName("city").item(0).getTextContent());
+					entry.setContent(e.getElementsByTagName("content").item(0).getTextContent());
 					if (e.getElementsByTagName("entered_by").getLength() > 0)
 						entry.setEnteredBy(e.getElementsByTagName("entered_by").item(0).getTextContent());
 					else
 						entry.setEnteredBy("Anonymous");
 					
-					if (e.getElementsByTagName("content").getLength() > 0)
-						entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
-					
 					boolean isPartOfKeywords = isSubstringOf(Extractor.extractKeywords(entry), request.getKeyword());
 					boolean isPartOfPeople = isSubstringOf(Extractor.extractPeople(entry), request.getPerson());
 					boolean isPartOfOrganisations = isSubstringOf(Extractor.extractOrganisations(entry), request.getOrganisation());
 					boolean isPartOfLocations = isSubstringOf(Extractor.extractLocations(entry), request.getLocation());
+					
+					entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
+					
+					System.out.println(isPartOfKeywords);
+					System.out.println(isPartOfPeople);
+					System.out.println(isPartOfOrganisations);
+					System.out.println(isPartOfLocations);
 					
 					if (isPartOfKeywords && isPartOfPeople && isPartOfLocations && isPartOfOrganisations) {
 						results.add(entry);
@@ -291,7 +297,7 @@ public class XMLDao {
 		if (request.getPerson() != null && !request.getPerson().isEmpty()){
 			filters.add("contains(content, '" + request.getPerson() + "')");
 		}
-		if (request.getOrganisation() != null && !request.getOrganisation() .isEmpty()){
+		if (request.getOrganisation() != null && !request.getOrganisation().isEmpty()){
 			filters.add("contains(content, '" + request.getOrganisation() + "')");
 		}
 		if (request.getLocation() != null && !request.getLocation().isEmpty()){
