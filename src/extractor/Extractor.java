@@ -67,4 +67,22 @@ public class Extractor {
 	public static String[] extractKeywords (Entry entry) throws Exception{
 		return keywordExtractor.ExtractSentenceKeyword(entry.getContent(), new File("WebContent/keywords/englishStopwords.txt")).split(",");
 	}
+	
+	public static void highlightMatchedEntities(List<String> list, String searchString) {
+		for (String s : list) {
+			if (!searchString.isEmpty() && s.contains(searchString)) {
+				s = new String(s.replace(searchString, "<strong class=\"text-danger\">" + searchString + "</strong>"));
+			}
+		}
+		System.out.println(list.toString());
+	}
+	
+	public static void highlightMatchedEntities(String[] list, String searchString) {
+		for (String s : list) {
+			if (!searchString.isEmpty() && s.contains(searchString)) {
+				System.out.println(s);
+				s = new String(s.replace(searchString, "<strong class=\"text-danger\">" + searchString + "</strong>"));
+			}
+		}
+	}
 }

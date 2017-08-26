@@ -118,10 +118,15 @@ public class XMLDao {
 					else
 						entry.setEnteredBy("Anonymous");
 					
-					boolean isPartOfKeywords = isSubstringOf(Extractor.extractKeywords(entry), request.getKeyword());
-					boolean isPartOfPeople = isSubstringOf(Extractor.extractPeople(entry), request.getPerson());
-					boolean isPartOfOrganisations = isSubstringOf(Extractor.extractOrganisations(entry), request.getOrganisation());
-					boolean isPartOfLocations = isSubstringOf(Extractor.extractLocations(entry), request.getLocation());
+					String[] keywords = Extractor.extractKeywords(entry);
+					List<String> people = Extractor.extractPeople(entry);
+					List<String> organisations = Extractor.extractOrganisations(entry);
+					List<String> locations = Extractor.extractLocations(entry);
+					
+					boolean isPartOfKeywords = isSubstringOf(keywords, request.getKeyword());
+					boolean isPartOfPeople = isSubstringOf(people, request.getPerson());
+					boolean isPartOfOrganisations = isSubstringOf(organisations, request.getOrganisation());
+					boolean isPartOfLocations = isSubstringOf(locations, request.getLocation());
 					
 					entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
 					
@@ -131,6 +136,16 @@ public class XMLDao {
 					System.out.println(isPartOfLocations);
 					
 					if (isPartOfKeywords && isPartOfPeople && isPartOfLocations && isPartOfOrganisations) {
+						Extractor.highlightMatchedEntities(keywords, request.getKeyword());
+						Extractor.highlightMatchedEntities(people, request.getPerson());
+						Extractor.highlightMatchedEntities(organisations, request.getOrganisation());
+						Extractor.highlightMatchedEntities(locations, request.getLocation());
+						System.out.println(people.toString());
+						entry.setContent(entry.getContent() + "\n\nKeywords : " + keywords.toString()
+								+ "\n\nPeople : " + people.toString()
+								+ "\n\nOrganisations : " + organisations.toString()
+								+ "\n\nLocations : " + locations.toString());
+						
 						results.add(entry);
 					}
 					
