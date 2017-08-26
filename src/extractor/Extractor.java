@@ -68,21 +68,11 @@ public class Extractor {
 		return keywordExtractor.ExtractSentenceKeyword(entry.getContent(), new File("WebContent/keywords/englishStopwords.txt")).split(",");
 	}
 	
-	public static void highlightMatchedEntities(List<String> list, String searchString) {
-		for (String s : list) {
-			if (!searchString.isEmpty() && s.contains(searchString)) {
-				s = new String(s.replace(searchString, "<strong class=\"text-danger\">" + searchString + "</strong>"));
-			}
+	public static String highlightMatchedEntities(String sentence, String searchString) {
+		if (!searchString.isEmpty()) {
+			return sentence.replace(searchString, "<strong class=\"text-danger\">" + searchString + "</strong>");
 		}
-		System.out.println(list.toString());
+		return sentence;
 	}
 	
-	public static void highlightMatchedEntities(String[] list, String searchString) {
-		for (String s : list) {
-			if (!searchString.isEmpty() && s.contains(searchString)) {
-				System.out.println(s);
-				s = new String(s.replace(searchString, "<strong class=\"text-danger\">" + searchString + "</strong>"));
-			}
-		}
-	}
 }

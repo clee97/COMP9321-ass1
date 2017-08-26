@@ -136,15 +136,15 @@ public class XMLDao {
 					System.out.println(isPartOfLocations);
 					
 					if (isPartOfKeywords && isPartOfPeople && isPartOfLocations && isPartOfOrganisations) {
-						Extractor.highlightMatchedEntities(keywords, request.getKeyword());
-						Extractor.highlightMatchedEntities(people, request.getPerson());
-						Extractor.highlightMatchedEntities(organisations, request.getOrganisation());
-						Extractor.highlightMatchedEntities(locations, request.getLocation());
+						String keywordsString = Extractor.highlightMatchedEntities(keywords.toString(), request.getKeyword());
+						String peopleString = Extractor.highlightMatchedEntities(people.toString(), request.getPerson());
+						String organisationsString = Extractor.highlightMatchedEntities(organisations.toString(), request.getOrganisation());
+						String locationsString = Extractor.highlightMatchedEntities(locations.toString(), request.getLocation());
 						System.out.println(people.toString());
-						entry.setContent(entry.getContent() + "\n\nKeywords : " + keywords.toString()
-								+ "\n\nPeople : " + people.toString()
-								+ "\n\nOrganisations : " + organisations.toString()
-								+ "\n\nLocations : " + locations.toString());
+						entry.setContent(entry.getContent() + "\n\nKeywords : " + keywordsString
+								+ "\n\nPeople : " + peopleString
+								+ "\n\nOrganisations : " + organisationsString
+								+ "\n\nLocations : " + locationsString);
 						
 						results.add(entry);
 					}
