@@ -118,36 +118,37 @@ public class XMLDao {
 					else
 						entry.setEnteredBy("Anonymous");
 					
-					String[] keywords = Extractor.extractKeywords(entry);
-					List<String> people = Extractor.extractPeople(entry);
-					List<String> organisations = Extractor.extractOrganisations(entry);
-					List<String> locations = Extractor.extractLocations(entry);
-					
-					boolean isPartOfKeywords = isSubstringOf(keywords, request.getKeyword());
-					boolean isPartOfPeople = isSubstringOf(people, request.getPerson());
-					boolean isPartOfOrganisations = isSubstringOf(organisations, request.getOrganisation());
-					boolean isPartOfLocations = isSubstringOf(locations, request.getLocation());
-					
-					entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
-					
-					System.out.println(isPartOfKeywords);
-					System.out.println(isPartOfPeople);
-					System.out.println(isPartOfOrganisations);
-					System.out.println(isPartOfLocations);
-					
-					if (isPartOfKeywords && isPartOfPeople && isPartOfLocations && isPartOfOrganisations) {
-						String keywordsString = Extractor.highlightMatchedEntities(keywords.toString(), request.getKeyword());
-						String peopleString = Extractor.highlightMatchedEntities(people.toString(), request.getPerson());
-						String organisationsString = Extractor.highlightMatchedEntities(organisations.toString(), request.getOrganisation());
-						String locationsString = Extractor.highlightMatchedEntities(locations.toString(), request.getLocation());
-						System.out.println(people.toString());
-						entry.setContent(entry.getContent() + "\n\nKeywords : " + keywordsString
-								+ "\n\nPeople : " + peopleString
-								+ "\n\nOrganisations : " + organisationsString
-								+ "\n\nLocations : " + locationsString);
-						
-						results.add(entry);
-					}
+//					String[] keywords = Extractor.extractKeywords(entry);
+//					List<String> people = Extractor.extractPeople(entry);
+//					List<String> organisations = Extractor.extractOrganisations(entry);
+//					List<String> locations = Extractor.extractLocations(entry);
+//					
+//					boolean isPartOfKeywords = isSubstringOf(keywords, request.getKeyword());
+//					boolean isPartOfPeople = isSubstringOf(people, request.getPerson());
+//					boolean isPartOfOrganisations = isSubstringOf(organisations, request.getOrganisation());
+//					boolean isPartOfLocations = isSubstringOf(locations, request.getLocation());
+//					
+//					entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
+//					
+//					System.out.println(isPartOfKeywords);
+//					System.out.println(isPartOfPeople);
+//					System.out.println(isPartOfOrganisations);
+//					System.out.println(isPartOfLocations);
+//					
+//					if (isPartOfKeywords && isPartOfPeople && isPartOfLocations && isPartOfOrganisations) {
+//						String keywordsString = Extractor.highlightMatchedEntities(keywords.toString(), request.getKeyword());
+//						String peopleString = Extractor.highlightMatchedEntities(people.toString(), request.getPerson());
+//						String organisationsString = Extractor.highlightMatchedEntities(organisations.toString(), request.getOrganisation());
+//						String locationsString = Extractor.highlightMatchedEntities(locations.toString(), request.getLocation());
+//						System.out.println(people.toString());
+//						entry.setContent(entry.getContent() + "\n\nKeywords : " + keywordsString
+//								+ "\n\nPeople : " + peopleString
+//								+ "\n\nOrganisations : " + organisationsString
+//								+ "\n\nLocations : " + locationsString);
+//						
+//						results.add(entry);
+//					}
+					results.add(entry);
 					
 				}
 			}
