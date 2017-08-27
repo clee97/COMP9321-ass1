@@ -75,4 +75,8 @@ public class Extractor {
 		return sentence;
 	}
 	
+	public static String listToString(String[] list){
+		return "["+ String.join(",", list) + "]";
+	}
+	
 }
