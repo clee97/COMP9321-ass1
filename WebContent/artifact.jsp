@@ -49,16 +49,6 @@
                 <pre><%=artifact.getContent() %></pre>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12">
-                <div class="well">
-                    <h2>Subscription Box</h2>
-                    <p>Form Description Goes here</p>
-                    <div class="input-group">
-			      <input type="text" class="form-control" placeholder="Search for...">
-			      <span class="input-group-btn">
-			        <button class="btn btn-default" type="button">Go!</button>
-			      </span>
-			 	</div>
-                </div>
                 <form id="extract" method="GET" action="API">
                 <input type="hidden" name="address" value="<%=artifact.getAddress()%>">
 	                <div class="list-group">

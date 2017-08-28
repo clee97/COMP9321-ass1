@@ -29,12 +29,16 @@
     	    <ul>
                 <li><a href="#"><strong>Home</strong></a></li>   
                 <ul>
-                	<li><a href="#">Search News</a></li>
+                	<li>Artifact Page</li>
+                	<li><a href="search.jsp">Search News</a></li>
                 	<ul>
-                		<li>Artifact Page</li>
+                		<li>Search Results</li>
+     		            <ul>
+                			<li>Artifact Page</li>
+                		</ul>
                 	</ul>
-                	<li><a href="#">Contact Us</a></li>
-                	<li><a href="#">Site Map</a></li>
+                	<li><a href="contactus.jsp">Contact Us</a></li>
+                	<li><a href="sitemap.jsp">Site Map</a></li>
                 </ul>
     	    </ul>   
 		</div>
