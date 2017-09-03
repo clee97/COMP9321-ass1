@@ -2,7 +2,11 @@ package extractor;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import models.Entry;
 import unsw.curation.api.domain.abstraction.IKeywordEx;
@@ -14,15 +18,6 @@ public class Extractor {
 	private static ExtractEntitySentence entityExtractor = new ExtractEntitySentence();
 	private static IKeywordEx keywordExtractor = new ExtractionKeywordImpl();
 	
-	public static void main(String[] args) {
-		try {
-			System.out.println(entityExtractor.ExtractPerson("Oregon State Lottery Commission Mary Kay Wheat, Portland"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 	public static void highlightPeople (Entry entry) throws URISyntaxException{
 		List<String> people = entityExtractor.ExtractPerson(entry.getContent());
 		for (String name : people){
@@ -31,7 +26,9 @@ public class Extractor {
 	}
 	
 	public static List<String> extractPeople (Entry entry) throws URISyntaxException{
-		return entityExtractor.ExtractPerson(entry.getContent());
+		List<String> list = entityExtractor.ExtractPerson(entry.getContent());
+		removeDuplicates(list);
+		return list;
 	}
 	
 	public static void highlightOrganisations (Entry entry) throws URISyntaxException{
@@ -42,7 +39,9 @@ public class Extractor {
 	}
 	
 	public static List<String> extractOrganisations (Entry entry) throws URISyntaxException{
-		return entityExtractor.ExtractOrganization(entry.getContent());
+		List<String> list = entityExtractor.ExtractOrganization(entry.getContent());
+		removeDuplicates(list);
+		return list;
 	}
 	
 	public static void highlightLocations (Entry entry) throws URISyntaxException{
@@ -53,19 +52,27 @@ public class Extractor {
 	}
 	
 	public static List<String> extractLocations (Entry entry) throws URISyntaxException{
-		return entityExtractor.ExtractLocation(entry.getContent());
+		List<String> list = entityExtractor.ExtractLocation(entry.getContent());
+		removeDuplicates(list);
+		return list;
 	}
 	
 	public static void highlightKeywords (Entry entry) throws Exception{
 		String keywords = keywordExtractor.ExtractSentenceKeyword(entry.getContent(), new File("WebContent/keywords/englishStopwords.txt"));
 		String[] keywordsArray = keywords.split(",");
 		for (String k : keywordsArray){
-			entry.setContent(entry.getContent().replace(k.trim(), "<strong class=\"text-danger\">" + k.trim() + "</strong>"));
+			if (k.equals("strong") || k.equals("class") || k.equals("text") || k.equals("danger")){
+				entry.setContent(entry.getContent().replace(" " + k.trim() + " ", "<strong class=\"text-danger\">" + " " + k.trim() + " " + "</strong>"));
+			}else{
+				entry.setContent(entry.getContent().replace(k.trim(), "<strong class=\"text-danger\">" + k.trim() + "</strong>"));
+			}
 		}
 	}
 	
-	public static String[] extractKeywords (Entry entry) throws Exception{
-		return keywordExtractor.ExtractSentenceKeyword(entry.getContent(), new File("WebContent/keywords/englishStopwords.txt")).split(",");
+	public static List<String> extractKeywords (Entry entry) throws Exception{
+		List<String> list = new ArrayList<String>(Arrays.asList(keywordExtractor.ExtractSentenceKeyword(entry.getContent(), new File("WebContent/keywords/englishStopwords.txt")).split(",")));
+		removeDuplicates(list);
+		return list;
 	}
 	
 	public static String highlightMatchedEntities(String sentence, String searchString) {
@@ -77,6 +84,12 @@ public class Extractor {
 	
 	public static String listToString(String[] list){
 		return "["+ String.join(",", list) + "]";
+	}
+	
+	private static void removeDuplicates(List<String> list){
+		Set<String> set = new HashSet<String>(list);
+		list.clear();
+		list.addAll(set);
 	}
 	
 }

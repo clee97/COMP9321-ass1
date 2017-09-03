@@ -30,11 +30,6 @@ public class XMLDao {
 		initXMLdoc();
 	}
 	
-	public static void main(String[] args) {
-		XMLDao dao = new XMLDao();
-		System.out.println("Randy Weist".contains("Randy Weist"));
-	}
-	
 	/**
 	 * 
 	 * @param request (search strings will be stored here)
@@ -51,13 +46,6 @@ public class XMLDao {
 				Node n = nl.item(i);
 				if (n.getNodeType() == Node.ELEMENT_NODE){
 					Element e = (Element)n;
-					/*debug stuff*/
-					System.out.println(e.getAttribute("_address"));
-					System.out.println(e.getElementsByTagName("agency").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("headline").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("publish_date").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("city").item(0).getTextContent()) ;
-					System.out.println("===============================");
 					
 					Entry entry = new Entry();
 					entry.setAddress(e.getAttribute("_address"));
@@ -98,13 +86,6 @@ public class XMLDao {
 				Node n = nl.item(i);
 				if (n.getNodeType() == Node.ELEMENT_NODE){
 					Element e = (Element)n;
-					/*debug stuff*/
-					System.out.println(e.getAttribute("_address"));
-					System.out.println(e.getElementsByTagName("agency").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("headline").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("publish_date").item(0).getTextContent()) ;
-					System.out.println(e.getElementsByTagName("city").item(0).getTextContent()) ;
-					System.out.println("===============================");
 					
 					Entry entry = new Entry();
 					entry.setAddress(e.getAttribute("_address"));
@@ -118,7 +99,7 @@ public class XMLDao {
 					else
 						entry.setEnteredBy("Anonymous");
 					
-					String[] keywords = Extractor.extractKeywords(entry);
+					List<String> keywords = Extractor.extractKeywords(entry);
 					List<String> people = Extractor.extractPeople(entry);
 					List<String> organisations = Extractor.extractOrganisations(entry);
 					List<String> locations = Extractor.extractLocations(entry);
@@ -130,13 +111,8 @@ public class XMLDao {
 					
 					entry.setContent(e.getElementsByTagName("content").item(0).getTextContent().substring(0, e.getElementsByTagName("content").item(0).getTextContent().length()/4) + "<strong class=\"text-danger\">....... CLICK TITLE TO READ MORE</strong>");
 					
-					System.out.println(isPartOfKeywords);
-					System.out.println(isPartOfPeople);
-					System.out.println(isPartOfOrganisations);
-					System.out.println(isPartOfLocations);
-					
 					if (isPartOfKeywords && isPartOfPeople && isPartOfLocations && isPartOfOrganisations) {
-						String keywordsString = Extractor.highlightMatchedEntities(Extractor.listToString(keywords), request.getKeyword());
+						String keywordsString = Extractor.highlightMatchedEntities(keywords.toString(), request.getKeyword());
 						String peopleString = Extractor.highlightMatchedEntities(people.toString(), request.getPerson());
 						String organisationsString = Extractor.highlightMatchedEntities(organisations.toString(), request.getOrganisation());
 						String locationsString = Extractor.highlightMatchedEntities(locations.toString(), request.getLocation());
@@ -196,14 +172,6 @@ public class XMLDao {
 			NodeList nl = (NodeList) xPath.compile("/response/row/row[contains(@_address, '" + address + "')]").evaluate(doc, XPathConstants.NODESET);
 			Element e = (Element)nl.item(0);
 			
-			System.out.println(e.getAttribute("_address"));
-			System.out.println(e.getElementsByTagName("agency").item(0).getTextContent()) ;
-			System.out.println(e.getElementsByTagName("headline").item(0).getTextContent()) ;
-			System.out.println(e.getElementsByTagName("publish_date").item(0).getTextContent()) ;
-			System.out.println(e.getElementsByTagName("city").item(0).getTextContent()) ;
-			System.out.println(e.getElementsByTagName("entered_by").item(0).getTextContent()) ;
-			System.out.println("===============================");
-			
 			entry = new Entry();
 			entry.setAddress(e.getAttribute("_address"));
 			entry.setAgency(e.getElementsByTagName("agency").item(0).getTextContent());
@@ -259,14 +227,6 @@ public class XMLDao {
 			Collections.shuffle(results);
 			if (count > results.size()) count = results.size();
 			randomList = results.subList(0, count);
-			
-			for (Entry en : randomList){
-				System.out.println(en.getAgency());
-				System.out.println(en.getHeadline());
-				System.out.println(en.getDate());
-				System.out.println(en.getCity());
-				System.out.println("========================================");
-			}
 
 		} catch(Exception e){
 			e.printStackTrace(System.err);
