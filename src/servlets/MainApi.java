@@ -34,7 +34,7 @@ public class MainApi extends HttpServlet {
 		if (action.equals("search")){
 			request.getSession().invalidate();
 			SearchRequest sr = new SearchRequest(request.getParameter("entry-agency"), request.getParameter("entry-headline"), request.getParameter("entry-date"), 
-					request.getParameter("entry-date"), request.getParameter("entry-content"));
+					request.getParameter("entry-city"), request.getParameter("entry-content"));
 			List<List<Entry>> results = dao.search(sr);
 			request.getSession().setAttribute("searchResults", results);
 			/*
